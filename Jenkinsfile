@@ -27,22 +27,23 @@ pipeline {
         stage('Test Container') {
             steps {
                 sh '''
-                # Remove old test container if it exists
+                # Remove old test container
                 docker stop $TEST_CONTAINER || true
                 docker rm $TEST_CONTAINER || true
 
-                # Run new test container
+                # Run test container
                 docker run -d \
                   --name $TEST_CONTAINER \
-                  -p 5002:5000 \
+                  -p 5002:5050 \
                   $IMAGE_NAME:$IMAGE_TAG
 
                 sleep 10
 
-                # Check container is running
-                docker ps
-
+                echo "Checking running container..."
                 docker ps | grep $TEST_CONTAINER
+
+                echo "Testing Flask application..."
+                curl --fail http://localhost:5002 || exit 1
 
                 # Cleanup
                 docker stop $TEST_CONTAINER
@@ -82,14 +83,11 @@ pipeline {
         stage('Deploy Application') {
             steps {
                 sh '''
-                # Stop old application
                 docker stop $APP_CONTAINER || true
                 docker rm $APP_CONTAINER || true
 
-                # Remove old image (optional)
                 docker image prune -f || true
 
-                # Run latest application
                 docker run -d \
                   --name $APP_CONTAINER \
                   -p 5050:5050 \
@@ -99,6 +97,8 @@ pipeline {
                 sleep 5
 
                 docker ps
+
+                echo "Application deployed successfully."
                 '''
             }
         }
