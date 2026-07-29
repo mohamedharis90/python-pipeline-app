@@ -92,7 +92,7 @@ pipeline {
                 # Run latest application
                 docker run -d \
                   --name $APP_CONTAINER \
-                  -p 5000:5000 \
+                  -p 5050:5050 \
                   --restart unless-stopped \
                   $IMAGE_NAME:$IMAGE_TAG
 
