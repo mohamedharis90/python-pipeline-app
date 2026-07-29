@@ -35452,71 +35452,24 @@ window.print();
 }
 
 </script>
-<!-- ================= END OF HOSPITAL ERP ================= -->
+<!-- ================= PROJECT COMPLETED ================= -->
 
-<footer style="background:#0f172a;
-color:white;
-padding:50px;
-text-align:center;
-margin-top:50px;">
-
-<h2>🏥 Hospital ERP Management System</h2>
-
-<h3>Version 1.0</h3>
-
-<p>
-Developed using HTML, CSS and JavaScript
-</p>
-
-<hr style="margin:25px 0;">
-
-<p>✔ 147+ Modules Completed</p>
-
-<p>✔ Complete Hospital ERP UI Prototype</p>
-
-<p>✔ AI Enabled Demo</p>
-
-<p>✔ Responsive Dashboard</p>
-
-<p>✔ Electronic Medical Records</p>
-
-<p>✔ Billing</p>
-
-<p>✔ Laboratory</p>
-
-<p>✔ Pharmacy</p>
-
-<p>✔ ICU</p>
-
-<p>✔ Emergency</p>
-
-<p>✔ 40+ Hospital Departments</p>
-
-<p>✔ 140+ Interactive Forms</p>
-
-<hr style="margin:25px 0;">
-
-<h3>🎉 PROJECT COMPLETED</h3>
-
-<p>
-Thank you for using Hospital ERP Management System.
-</p>
-
-<p>
-© 2026 Hospital ERP. All Rights Reserved.
-</p>
-
+<footer>
+    <h2>🏥 Hospital ERP Management System</h2>
+    <p>Version 1.0</p>
+    <p>147+ Modules Completed</p>
+    <p>Developed using HTML, CSS & JavaScript</p>
+    <p>© 2026 All Rights Reserved.</p>
 </footer>
-window.onload = function(){
 
-alert(
-"🏥 Hospital ERP Management System\n\n"+
-"Version 1.0\n\n"+
-"147+ Modules Successfully Integrated.\n"+
-"Project Completed Successfully."
-);
+<script>
+    // All your JavaScript functions should be above this line.
 
-}
+    console.log("Hospital ERP Loaded Successfully");
+</script>
+
+</body>
+</html>
 
 
 
