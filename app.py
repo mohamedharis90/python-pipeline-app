@@ -28990,8 +28990,6533 @@ window.print();
 
 </script>
 
+<!-- ================= GERIATRIC CARE MANAGEMENT SYSTEM ================= -->
 
+<section class="geriatricSection">
 
+<h2 class="title">👴 Geriatric Care Management System</h2>
+
+<div class="geriatricForm">
+
+<input type="text" id="patientName" placeholder="Patient Name">
+
+<input type="number" id="patientAge" placeholder="Age">
+
+<select id="gender">
+
+<option>Male</option>
+<option>Female</option>
+
+</select>
+
+<select id="disease">
+
+<option>Hypertension</option>
+<option>Diabetes</option>
+<option>Arthritis</option>
+<option>Dementia</option>
+<option>Parkinson's Disease</option>
+<option>Heart Disease</option>
+<option>Osteoporosis</option>
+<option>Routine Checkup</option>
+
+</select>
+
+<select id="mobility">
+
+<option>Independent</option>
+<option>Walking Stick</option>
+<option>Walker</option>
+<option>Wheelchair</option>
+<option>Bedridden</option>
+
+</select>
+
+<button onclick="saveSenior()">
+
+👴 Register Senior Patient
+
+</button>
+
+</div>
+
+<div class="geriatricCards">
+
+<div class="geriatricCard">
+
+<h1 id="seniorPatients">842</h1>
+
+<p>Senior Patients</p>
+
+</div>
+
+<div class="geriatricCard">
+
+<h1 id="homeCare">216</h1>
+
+<p>Home Care</p>
+
+</div>
+
+<div class="geriatricCard">
+
+<h1 id="highRisk">41</h1>
+
+<p>High Risk</p>
+
+</div>
+
+<div class="geriatricCard">
+
+<h1 id="followup">97</h1>
+
+<p>Follow-up Today</p>
+
+</div>
+
+</div>
+
+<table class="geriatricTable">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Patient</th>
+
+<th>Age</th>
+
+<th>Disease</th>
+
+<th>Mobility</th>
+
+<th>AI Care Plan</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="geriatricBody">
+
+<tr>
+
+<td>1</td>
+
+<td>Raman</td>
+
+<td>72</td>
+
+<td>Hypertension</td>
+
+<td>Walking Stick</td>
+
+<td>Monthly BP Monitoring</td>
+
+<td>
+
+<button onclick="viewSenior(this)">View</button>
+
+<button onclick="printSenior()">Print</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+<style>
+
+.geriatricSection{
+
+padding:90px 8%;
+
+background:#f9fafb;
+
+}
+
+.geriatricForm{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:15px;
+
+margin-bottom:30px;
+
+}
+
+.geriatricForm input,
+.geriatricForm select{
+
+padding:14px;
+
+border:1px solid #ccc;
+
+border-radius:10px;
+
+}
+
+.geriatricForm button{
+
+background:#6d4c41;
+
+color:white;
+
+border:none;
+
+padding:14px;
+
+border-radius:10px;
+
+cursor:pointer;
+
+font-weight:bold;
+
+}
+
+.geriatricCards{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:20px;
+
+margin-bottom:30px;
+
+}
+
+.geriatricCard{
+
+background:white;
+
+padding:25px;
+
+border-radius:16px;
+
+text-align:center;
+
+box-shadow:0 8px 18px rgba(0,0,0,.08);
+
+}
+
+.geriatricCard h1{
+
+font-size:40px;
+
+color:#6d4c41;
+
+}
+
+.geriatricTable{
+
+width:100%;
+
+background:white;
+
+border-collapse:collapse;
+
+border-radius:15px;
+
+overflow:hidden;
+
+}
+
+.geriatricTable th{
+
+background:#6d4c41;
+
+color:white;
+
+padding:15px;
+
+}
+
+.geriatricTable td{
+
+padding:14px;
+
+border-bottom:1px solid #eee;
+
+text-align:center;
+
+}
+
+.geriatricTable button{
+
+background:#6d4c41;
+
+color:white;
+
+border:none;
+
+padding:8px 14px;
+
+border-radius:8px;
+
+cursor:pointer;
+
+margin:2px;
+
+}
+
+</style>
+
+<script>
+
+let seniorID=1;
+
+function saveSenior(){
+
+let patient=document.getElementById("patientName").value;
+
+let age=parseInt(document.getElementById("patientAge").value);
+
+let disease=document.getElementById("disease").value;
+
+let mobility=document.getElementById("mobility").value;
+
+if(patient==""){
+
+alert("Enter Patient Name");
+
+return;
+
+}
+
+let ai="Routine Annual Assessment";
+
+if(disease=="Hypertension")
+
+ai="Monthly BP Monitoring";
+
+if(disease=="Diabetes")
+
+ai="HbA1c Every 3 Months";
+
+if(disease=="Arthritis")
+
+ai="Physiotherapy Recommended";
+
+if(disease=="Dementia")
+
+ai="Memory Clinic Follow-up";
+
+if(disease=="Parkinson's Disease")
+
+ai="Neurology Review";
+
+if(mobility=="Wheelchair")
+
+ai+=" + Wheelchair Assistance";
+
+if(mobility=="Bedridden")
+
+ai="24/7 Nursing Care";
+
+seniorID++;
+
+let row="<tr>"+
+
+"<td>"+seniorID+"</td>"+
+
+"<td>"+patient+"</td>"+
+
+"<td>"+age+"</td>"+
+
+"<td>"+disease+"</td>"+
+
+"<td>"+mobility+"</td>"+
+
+"<td>"+ai+"</td>"+
+
+"<td><button onclick='viewSenior(this)'>View</button> <button onclick='printSenior()'>Print</button></td>"+
+
+"</tr>";
+
+document.getElementById("geriatricBody").innerHTML+=row;
+
+document.getElementById("seniorPatients").innerHTML=
+
+parseInt(document.getElementById("seniorPatients").innerHTML)+1;
+
+if(age>=80){
+
+document.getElementById("highRisk").innerHTML=
+
+parseInt(document.getElementById("highRisk").innerHTML)+1;
+
+}
+
+alert("👴 Senior patient registered successfully.");
+
+}
+
+function viewSenior(btn){
+
+let row=btn.parentElement.parentElement;
+
+alert(
+
+"Patient : "+row.cells[1].innerHTML+
+
+"\nAge : "+row.cells[2].innerHTML+
+
+"\nDisease : "+row.cells[3].innerHTML+
+
+"\nMobility : "+row.cells[4].innerHTML+
+
+"\nAI Care Plan : "+row.cells[5].innerHTML
+
+);
+
+}
+
+function printSenior(){
+
+window.print();
+
+}
+
+</script>
+<!-- ================= ORTHOPEDICS & FRACTURE MANAGEMENT SYSTEM ================= -->
+
+<section class="orthoSection">
+
+<h2 class="title">🦴 Orthopedics & Fracture Management System</h2>
+
+<div class="orthoForm">
+
+<input type="text" id="patientName" placeholder="Patient Name">
+
+<input type="number" id="patientAge" placeholder="Age">
+
+<select id="fractureType">
+
+<option>Simple Fracture</option>
+<option>Compound Fracture</option>
+<option>Spinal Injury</option>
+<option>Hip Fracture</option>
+<option>Shoulder Dislocation</option>
+<option>Knee Ligament Injury</option>
+<option>Ankle Fracture</option>
+<option>No Fracture</option>
+
+</select>
+
+<select id="boneName">
+
+<option>Femur</option>
+<option>Tibia</option>
+<option>Fibula</option>
+<option>Humerus</option>
+<option>Radius</option>
+<option>Ulna</option>
+<option>Pelvis</option>
+<option>Spine</option>
+
+</select>
+
+<select id="treatment">
+
+<option>Plaster Cast</option>
+<option>Surgery</option>
+<option>Physiotherapy</option>
+<option>Joint Replacement</option>
+<option>External Fixator</option>
+
+</select>
+
+<button onclick="saveOrtho()">
+
+🦴 Register Patient
+
+</button>
+
+</div>
+
+<div class="orthoCards">
+
+<div class="orthoCard">
+
+<h1 id="orthoPatients">1352</h1>
+
+<p>Orthopedic Patients</p>
+
+</div>
+
+<div class="orthoCard">
+
+<h1 id="fractureCases">628</h1>
+
+<p>Fracture Cases</p>
+
+</div>
+
+<div class="orthoCard">
+
+<h1 id="surgeries">284</h1>
+
+<p>Orthopedic Surgeries</p>
+
+</div>
+
+<div class="orthoCard">
+
+<h1 id="physioCases">463</h1>
+
+<p>Physiotherapy Cases</p>
+
+</div>
+
+</div>
+
+<table class="orthoTable">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Patient</th>
+
+<th>Bone</th>
+
+<th>Injury</th>
+
+<th>Treatment</th>
+
+<th>AI Recommendation</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="orthoBody">
+
+<tr>
+
+<td>1</td>
+
+<td>Arun</td>
+
+<td>Femur</td>
+
+<td>Simple Fracture</td>
+
+<td>Plaster Cast</td>
+
+<td>6 Weeks Immobilization</td>
+
+<td>
+
+<button onclick="viewOrtho(this)">View</button>
+
+<button onclick="printOrtho()">Print</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+<style>
+
+.orthoSection{
+
+padding:90px 8%;
+
+background:#f8fbff;
+
+}
+
+.orthoForm{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:15px;
+
+margin-bottom:30px;
+
+}
+
+.orthoForm input,
+.orthoForm select{
+
+padding:14px;
+
+border-radius:10px;
+
+border:1px solid #ccc;
+
+}
+
+.orthoForm button{
+
+padding:14px;
+
+background:#1565c0;
+
+color:white;
+
+border:none;
+
+border-radius:10px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+.orthoCards{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:20px;
+
+margin-bottom:30px;
+
+}
+
+.orthoCard{
+
+background:white;
+
+padding:25px;
+
+text-align:center;
+
+border-radius:15px;
+
+box-shadow:0 8px 18px rgba(0,0,0,.08);
+
+}
+
+.orthoCard h1{
+
+font-size:40px;
+
+color:#1565c0;
+
+}
+
+.orthoTable{
+
+width:100%;
+
+background:white;
+
+border-collapse:collapse;
+
+border-radius:15px;
+
+overflow:hidden;
+
+}
+
+.orthoTable th{
+
+background:#1565c0;
+
+color:white;
+
+padding:15px;
+
+}
+
+.orthoTable td{
+
+padding:14px;
+
+text-align:center;
+
+border-bottom:1px solid #eee;
+
+}
+
+.orthoTable button{
+
+padding:8px 12px;
+
+background:#1565c0;
+
+color:white;
+
+border:none;
+
+border-radius:8px;
+
+cursor:pointer;
+
+margin:2px;
+
+}
+
+</style>
+
+<script>
+
+let orthoID=1;
+
+function saveOrtho(){
+
+let patient=document.getElementById("patientName").value;
+
+let bone=document.getElementById("boneName").value;
+
+let injury=document.getElementById("fractureType").value;
+
+let treatment=document.getElementById("treatment").value;
+
+if(patient==""){
+
+alert("Enter patient details.");
+
+return;
+
+}
+
+let ai="Routine Follow-up";
+
+if(injury=="Simple Fracture")
+ai="6 Weeks Immobilization";
+
+if(injury=="Compound Fracture")
+ai="Emergency Surgery";
+
+if(injury=="Hip Fracture")
+ai="Hip Replacement Evaluation";
+
+if(injury=="Spinal Injury")
+ai="Immediate Spine Specialist Review";
+
+if(treatment=="Physiotherapy"){
+
+document.getElementById("physioCases").innerHTML=
+
+parseInt(document.getElementById("physioCases").innerHTML)+1;
+
+}
+
+if(treatment=="Surgery" || treatment=="Joint Replacement"){
+
+document.getElementById("surgeries").innerHTML=
+
+parseInt(document.getElementById("surgeries").innerHTML)+1;
+
+}
+
+orthoID++;
+
+let row="<tr>"+
+
+"<td>"+orthoID+"</td>"+
+
+"<td>"+patient+"</td>"+
+
+"<td>"+bone+"</td>"+
+
+"<td>"+injury+"</td>"+
+
+"<td>"+treatment+"</td>"+
+
+"<td>"+ai+"</td>"+
+
+"<td><button onclick='viewOrtho(this)'>View</button> <button onclick='printOrtho()'>Print</button></td>"+
+
+"</tr>";
+
+document.getElementById("orthoBody").innerHTML+=row;
+
+document.getElementById("orthoPatients").innerHTML=
+
+parseInt(document.getElementById("orthoPatients").innerHTML)+1;
+
+document.getElementById("fractureCases").innerHTML=
+
+parseInt(document.getElementById("fractureCases").innerHTML)+1;
+
+alert("🦴 Orthopedic record saved successfully.");
+
+}
+
+function viewOrtho(btn){
+
+let row=btn.parentElement.parentElement;
+
+alert(
+
+"Patient : "+row.cells[1].innerHTML+
+
+"\nBone : "+row.cells[2].innerHTML+
+
+"\nInjury : "+row.cells[3].innerHTML+
+
+"\nTreatment : "+row.cells[4].innerHTML+
+
+"\nAI Recommendation : "+row.cells[5].innerHTML
+
+);
+
+}
+
+function printOrtho(){
+
+window.print();
+
+}
+
+</script>
+<!-- ================= TRAUMA CENTER MANAGEMENT SYSTEM ================= -->
+
+<section class="traumaSection">
+
+<h2 class="title">🚑 Trauma Center Management System</h2>
+
+<div class="traumaForm">
+
+<input type="text" id="patientName" placeholder="Patient Name">
+
+<input type="number" id="patientAge" placeholder="Age">
+
+<select id="traumaType">
+
+<option>Road Traffic Accident</option>
+<option>Fall Injury</option>
+<option>Head Injury</option>
+<option>Chest Trauma</option>
+<option>Abdominal Trauma</option>
+<option>Burn Injury</option>
+<option>Gunshot Injury</option>
+<option>Industrial Accident</option>
+
+</select>
+
+<select id="severity">
+
+<option>Minor</option>
+<option>Moderate</option>
+<option>Severe</option>
+<option>Critical</option>
+
+</select>
+
+<select id="triage">
+
+<option>Green</option>
+<option>Yellow</option>
+<option>Orange</option>
+<option>Red</option>
+
+</select>
+
+<button onclick="saveTrauma()">
+
+🚑 Register Trauma Case
+
+</button>
+
+</div>
+
+<div class="traumaCards">
+
+<div class="traumaCard">
+
+<h1 id="traumaPatients">892</h1>
+
+<p>Trauma Cases</p>
+
+</div>
+
+<div class="traumaCard">
+
+<h1 id="criticalCases">76</h1>
+
+<p>Critical Cases</p>
+
+</div>
+
+<div class="traumaCard">
+
+<h1 id="emergencyOps">214</h1>
+
+<p>Emergency Surgeries</p>
+
+</div>
+
+<div class="traumaCard">
+
+<h1 id="ambulanceCases">485</h1>
+
+<p>Ambulance Arrivals</p>
+
+</div>
+
+</div>
+
+<table class="traumaTable">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Patient</th>
+
+<th>Trauma</th>
+
+<th>Severity</th>
+
+<th>Triage</th>
+
+<th>AI Action</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="traumaBody">
+
+<tr>
+
+<td>1</td>
+
+<td>Rahul</td>
+
+<td>Road Traffic Accident</td>
+
+<td>Critical</td>
+
+<td>Red</td>
+
+<td>Immediate Surgery</td>
+
+<td>
+
+<button onclick="viewTrauma(this)">View</button>
+
+<button onclick="printTrauma()">Print</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+<style>
+
+.traumaSection{
+
+padding:90px 8%;
+
+background:#fff8f5;
+
+}
+
+.traumaForm{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:15px;
+
+margin-bottom:30px;
+
+}
+
+.traumaForm input,
+.traumaForm select{
+
+padding:14px;
+
+border:1px solid #ccc;
+
+border-radius:10px;
+
+}
+
+.traumaForm button{
+
+padding:14px;
+
+background:#d32f2f;
+
+color:white;
+
+border:none;
+
+border-radius:10px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+.traumaCards{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:20px;
+
+margin-bottom:30px;
+
+}
+
+.traumaCard{
+
+background:white;
+
+padding:25px;
+
+text-align:center;
+
+border-radius:15px;
+
+box-shadow:0 8px 18px rgba(0,0,0,.08);
+
+}
+
+.traumaCard h1{
+
+font-size:40px;
+
+color:#d32f2f;
+
+}
+
+.traumaTable{
+
+width:100%;
+
+background:white;
+
+border-collapse:collapse;
+
+border-radius:15px;
+
+overflow:hidden;
+
+}
+
+.traumaTable th{
+
+background:#d32f2f;
+
+color:white;
+
+padding:15px;
+
+}
+
+.traumaTable td{
+
+padding:14px;
+
+text-align:center;
+
+border-bottom:1px solid #eee;
+
+}
+
+.traumaTable button{
+
+padding:8px 12px;
+
+margin:2px;
+
+background:#d32f2f;
+
+color:white;
+
+border:none;
+
+border-radius:8px;
+
+cursor:pointer;
+
+}
+
+</style>
+
+<script>
+
+let traumaID=1;
+
+function saveTrauma(){
+
+let patient=document.getElementById("patientName").value;
+
+let trauma=document.getElementById("traumaType").value;
+
+let severity=document.getElementById("severity").value;
+
+let triage=document.getElementById("triage").value;
+
+if(patient==""){
+
+alert("Please enter patient name.");
+
+return;
+
+}
+
+let ai="Emergency Evaluation";
+
+if(triage=="Green")
+ai="Treat in OPD";
+
+if(triage=="Yellow")
+ai="Observation Ward";
+
+if(triage=="Orange")
+ai="Emergency CT & Specialist Review";
+
+if(triage=="Red")
+ai="Immediate Trauma Team Activation";
+
+if(severity=="Critical"){
+
+document.getElementById("criticalCases").innerHTML=
+
+parseInt(document.getElementById("criticalCases").innerHTML)+1;
+
+document.getElementById("emergencyOps").innerHTML=
+
+parseInt(document.getElementById("emergencyOps").innerHTML)+1;
+
+}
+
+traumaID++;
+
+let row="<tr>"+
+
+"<td>"+traumaID+"</td>"+
+
+"<td>"+patient+"</td>"+
+
+"<td>"+trauma+"</td>"+
+
+"<td>"+severity+"</td>"+
+
+"<td>"+triage+"</td>"+
+
+"<td>"+ai+"</td>"+
+
+"<td><button onclick='viewTrauma(this)'>View</button> <button onclick='printTrauma()'>Print</button></td>"+
+
+"</tr>";
+
+document.getElementById("traumaBody").innerHTML+=row;
+
+document.getElementById("traumaPatients").innerHTML=
+
+parseInt(document.getElementById("traumaPatients").innerHTML)+1;
+
+alert("🚑 Trauma case registered successfully.");
+
+}
+
+function viewTrauma(btn){
+
+let row=btn.parentElement.parentElement;
+
+alert(
+
+"Patient : "+row.cells[1].innerHTML+
+
+"\nTrauma : "+row.cells[2].innerHTML+
+
+"\nSeverity : "+row.cells[3].innerHTML+
+
+"\nTriage : "+row.cells[4].innerHTML+
+
+"\nAI Action : "+row.cells[5].innerHTML
+
+);
+
+}
+
+function printTrauma(){
+
+window.print();
+
+}
+
+</script>
+<!-- ================= BURN UNIT MANAGEMENT SYSTEM ================= -->
+
+<section class="burnSection">
+
+<h2 class="title">🔥 Burn Unit Management System</h2>
+
+<div class="burnForm">
+
+<input type="text" id="patientName" placeholder="Patient Name">
+
+<input type="number" id="patientAge" placeholder="Age">
+
+<select id="burnType">
+
+<option>Thermal Burn</option>
+<option>Chemical Burn</option>
+<option>Electrical Burn</option>
+<option>Radiation Burn</option>
+<option>Scald Burn</option>
+
+</select>
+
+<input type="number" id="burnPercent" placeholder="TBSA Burn %">
+
+<select id="burnDegree">
+
+<option>First Degree</option>
+<option>Second Degree</option>
+<option>Third Degree</option>
+<option>Fourth Degree</option>
+
+</select>
+
+<select id="burnStatus">
+
+<option>Stable</option>
+<option>Serious</option>
+<option>Critical</option>
+
+</select>
+
+<button onclick="saveBurnCase()">
+
+🔥 Register Burn Case
+
+</button>
+
+</div>
+
+<div class="burnCards">
+
+<div class="burnCard">
+
+<h1 id="burnPatients">364</h1>
+
+<p>Burn Patients</p>
+
+</div>
+
+<div class="burnCard">
+
+<h1 id="criticalBurns">38</h1>
+
+<p>Critical Burns</p>
+
+</div>
+
+<div class="burnCard">
+
+<h1 id="skinGraft">92</h1>
+
+<p>Skin Graft Surgeries</p>
+
+</div>
+
+<div class="burnCard">
+
+<h1 id="icuBurn">21</h1>
+
+<p>Burn ICU</p>
+
+</div>
+
+</div>
+
+<table class="burnTable">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Patient</th>
+
+<th>Burn Type</th>
+
+<th>TBSA %</th>
+
+<th>Degree</th>
+
+<th>AI Recommendation</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="burnBody">
+
+<tr>
+
+<td>1</td>
+
+<td>Rahul</td>
+
+<td>Thermal Burn</td>
+
+<td>18%</td>
+
+<td>Second Degree</td>
+
+<td>IV Fluids + Dressing</td>
+
+<td>
+
+<button onclick="viewBurn(this)">View</button>
+
+<button onclick="printBurn()">Print</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+<style>
+
+.burnSection{
+
+padding:90px 8%;
+
+background:#fff7f3;
+
+}
+
+.burnForm{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:15px;
+
+margin-bottom:30px;
+
+}
+
+.burnForm input,
+.burnForm select{
+
+padding:14px;
+
+border:1px solid #ccc;
+
+border-radius:10px;
+
+}
+
+.burnForm button{
+
+padding:14px;
+
+background:#ef6c00;
+
+color:white;
+
+border:none;
+
+border-radius:10px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+.burnCards{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:20px;
+
+margin-bottom:30px;
+
+}
+
+.burnCard{
+
+background:white;
+
+padding:25px;
+
+text-align:center;
+
+border-radius:15px;
+
+box-shadow:0 8px 18px rgba(0,0,0,.08);
+
+}
+
+.burnCard h1{
+
+font-size:40px;
+
+color:#ef6c00;
+
+}
+
+.burnTable{
+
+width:100%;
+
+background:white;
+
+border-collapse:collapse;
+
+border-radius:15px;
+
+overflow:hidden;
+
+}
+
+.burnTable th{
+
+background:#ef6c00;
+
+color:white;
+
+padding:15px;
+
+}
+
+.burnTable td{
+
+padding:14px;
+
+text-align:center;
+
+border-bottom:1px solid #eee;
+
+}
+
+.burnTable button{
+
+padding:8px 12px;
+
+margin:2px;
+
+background:#ef6c00;
+
+color:white;
+
+border:none;
+
+border-radius:8px;
+
+cursor:pointer;
+
+}
+
+</style>
+
+<script>
+
+let burnID=1;
+
+function saveBurnCase(){
+
+let patient=document.getElementById("patientName").value;
+
+let burnType=document.getElementById("burnType").value;
+
+let percent=parseInt(document.getElementById("burnPercent").value);
+
+let degree=document.getElementById("burnDegree").value;
+
+let status=document.getElementById("burnStatus").value;
+
+if(patient==""){
+
+alert("Enter patient details.");
+
+return;
+
+}
+
+let ai="Daily Dressing";
+
+if(percent>=15)
+
+ai="IV Fluids + Burn Ward";
+
+if(percent>=30)
+
+ai="ICU + Plastic Surgery Consult";
+
+if(percent>=50)
+
+ai="Immediate Burn ICU + Skin Graft";
+
+if(status=="Critical"){
+
+document.getElementById("criticalBurns").innerHTML=
+
+parseInt(document.getElementById("criticalBurns").innerHTML)+1;
+
+document.getElementById("icuBurn").innerHTML=
+
+parseInt(document.getElementById("icuBurn").innerHTML)+1;
+
+}
+
+if(degree=="Third Degree" || degree=="Fourth Degree"){
+
+document.getElementById("skinGraft").innerHTML=
+
+parseInt(document.getElementById("skinGraft").innerHTML)+1;
+
+}
+
+burnID++;
+
+let row="<tr>"+
+
+"<td>"+burnID+"</td>"+
+
+"<td>"+patient+"</td>"+
+
+"<td>"+burnType+"</td>"+
+
+"<td>"+percent+"%</td>"+
+
+"<td>"+degree+"</td>"+
+
+"<td>"+ai+"</td>"+
+
+"<td><button onclick='viewBurn(this)'>View</button> <button onclick='printBurn()'>Print</button></td>"+
+
+"</tr>";
+
+document.getElementById("burnBody").innerHTML+=row;
+
+document.getElementById("burnPatients").innerHTML=
+
+parseInt(document.getElementById("burnPatients").innerHTML)+1;
+
+alert("🔥 Burn case registered successfully.");
+
+}
+
+function viewBurn(btn){
+
+let row=btn.parentElement.parentElement;
+
+alert(
+
+"Patient : "+row.cells[1].innerHTML+
+
+"\nBurn Type : "+row.cells[2].innerHTML+
+
+"\nTBSA : "+row.cells[3].innerHTML+
+
+"\nDegree : "+row.cells[4].innerHTML+
+
+"\nAI Recommendation : "+row.cells[5].innerHTML
+
+);
+
+}
+
+function printBurn(){
+
+window.print();
+
+}
+
+</script>
+<!-- ================= PLASTIC & RECONSTRUCTIVE SURGERY MANAGEMENT SYSTEM ================= -->
+
+<section class="plasticSection">
+
+<h2 class="title">🤲 Plastic & Reconstructive Surgery Management System</h2>
+
+<div class="plasticForm">
+
+<input type="text" id="patientName" placeholder="Patient Name">
+
+<input type="number" id="patientAge" placeholder="Age">
+
+<select id="surgeryType">
+
+<option>Reconstructive Surgery</option>
+<option>Cosmetic Surgery</option>
+<option>Skin Grafting</option>
+<option>Facial Reconstruction</option>
+<option>Hand Surgery</option>
+<option>Scar Revision</option>
+<option>Microsurgery</option>
+<option>Cleft Lip & Palate Repair</option>
+
+</select>
+
+<select id="bodyArea">
+
+<option>Face</option>
+<option>Hand</option>
+<option>Leg</option>
+<option>Chest</option>
+<option>Abdomen</option>
+<option>Neck</option>
+<option>Scalp</option>
+
+</select>
+
+<select id="priority">
+
+<option>Elective</option>
+<option>Urgent</option>
+<option>Emergency</option>
+
+</select>
+
+<button onclick="savePlasticCase()">
+
+🤲 Register Surgery
+
+</button>
+
+</div>
+
+<div class="plasticCards">
+
+<div class="plasticCard">
+
+<h1 id="plasticPatients">512</h1>
+
+<p>Total Patients</p>
+
+</div>
+
+<div class="plasticCard">
+
+<h1 id="reconstructiveCases">248</h1>
+
+<p>Reconstructive Cases</p>
+
+</div>
+
+<div class="plasticCard">
+
+<h1 id="cosmeticCases">164</h1>
+
+<p>Cosmetic Cases</p>
+
+</div>
+
+<div class="plasticCard">
+
+<h1 id="skinGrafts">96</h1>
+
+<p>Skin Grafts</p>
+
+</div>
+
+</div>
+
+<table class="plasticTable">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Patient</th>
+
+<th>Surgery</th>
+
+<th>Area</th>
+
+<th>Priority</th>
+
+<th>AI Suggestion</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="plasticBody">
+
+<tr>
+
+<td>1</td>
+
+<td>Rahul</td>
+
+<td>Skin Grafting</td>
+
+<td>Leg</td>
+
+<td>Urgent</td>
+
+<td>Schedule OT Within 24 Hours</td>
+
+<td>
+
+<button onclick="viewPlastic(this)">View</button>
+
+<button onclick="printPlastic()">Print</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+<style>
+
+.plasticSection{
+
+padding:90px 8%;
+
+background:#fffafc;
+
+}
+
+.plasticForm{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:15px;
+
+margin-bottom:30px;
+
+}
+
+.plasticForm input,
+.plasticForm select{
+
+padding:14px;
+
+border:1px solid #ccc;
+
+border-radius:10px;
+
+}
+
+.plasticForm button{
+
+padding:14px;
+
+background:#8e24aa;
+
+color:white;
+
+border:none;
+
+border-radius:10px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+.plasticCards{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:20px;
+
+margin-bottom:30px;
+
+}
+
+.plasticCard{
+
+background:white;
+
+padding:25px;
+
+text-align:center;
+
+border-radius:15px;
+
+box-shadow:0 8px 18px rgba(0,0,0,.08);
+
+}
+
+.plasticCard h1{
+
+font-size:40px;
+
+color:#8e24aa;
+
+}
+
+.plasticTable{
+
+width:100%;
+
+background:white;
+
+border-collapse:collapse;
+
+border-radius:15px;
+
+overflow:hidden;
+
+}
+
+.plasticTable th{
+
+background:#8e24aa;
+
+color:white;
+
+padding:15px;
+
+}
+
+.plasticTable td{
+
+padding:14px;
+
+text-align:center;
+
+border-bottom:1px solid #eee;
+
+}
+
+.plasticTable button{
+
+padding:8px 12px;
+
+margin:2px;
+
+background:#8e24aa;
+
+color:white;
+
+border:none;
+
+border-radius:8px;
+
+cursor:pointer;
+
+}
+
+</style>
+
+<script>
+
+let plasticID=1;
+
+function savePlasticCase(){
+
+let patient=document.getElementById("patientName").value;
+
+let surgery=document.getElementById("surgeryType").value;
+
+let area=document.getElementById("bodyArea").value;
+
+let priority=document.getElementById("priority").value;
+
+if(patient==""){
+
+alert("Please enter patient name.");
+
+return;
+
+}
+
+let ai="Routine Surgical Planning";
+
+if(surgery=="Skin Grafting")
+
+ai="Schedule OT Within 24 Hours";
+
+if(surgery=="Facial Reconstruction")
+
+ai="3D Surgical Planning Recommended";
+
+if(surgery=="Microsurgery")
+
+ai="Microscope & Vascular Team Required";
+
+if(priority=="Emergency")
+
+ai="Immediate Emergency OT";
+
+plasticID++;
+
+let row="<tr>"+
+
+"<td>"+plasticID+"</td>"+
+
+"<td>"+patient+"</td>"+
+
+"<td>"+surgery+"</td>"+
+
+"<td>"+area+"</td>"+
+
+"<td>"+priority+"</td>"+
+
+"<td>"+ai+"</td>"+
+
+"<td><button onclick='viewPlastic(this)'>View</button> <button onclick='printPlastic()'>Print</button></td>"+
+
+"</tr>";
+
+document.getElementById("plasticBody").innerHTML+=row;
+
+document.getElementById("plasticPatients").innerHTML=
+
+parseInt(document.getElementById("plasticPatients").innerHTML)+1;
+
+if(surgery=="Reconstructive Surgery"){
+
+document.getElementById("reconstructiveCases").innerHTML=
+
+parseInt(document.getElementById("reconstructiveCases").innerHTML)+1;
+
+}
+
+if(surgery=="Cosmetic Surgery"){
+
+document.getElementById("cosmeticCases").innerHTML=
+
+parseInt(document.getElementById("cosmeticCases").innerHTML)+1;
+
+}
+
+if(surgery=="Skin Grafting"){
+
+document.getElementById("skinGrafts").innerHTML=
+
+parseInt(document.getElementById("skinGrafts").innerHTML)+1;
+
+}
+
+alert("🤲 Plastic surgery case registered successfully.");
+
+}
+
+function viewPlastic(btn){
+
+let row=btn.parentElement.parentElement;
+
+alert(
+
+"Patient : "+row.cells[1].innerHTML+
+
+"\nSurgery : "+row.cells[2].innerHTML+
+
+"\nBody Area : "+row.cells[3].innerHTML+
+
+"\nPriority : "+row.cells[4].innerHTML+
+
+"\nAI Suggestion : "+row.cells[5].innerHTML
+
+);
+
+}
+
+function printPlastic(){
+
+window.print();
+
+}
+
+</script>
+
+<!-- ================= IMMUNOLOGY & ALLERGY MANAGEMENT SYSTEM ================= -->
+
+<section class="immunologySection">
+
+<h2 class="title">🧬 Immunology & Allergy Management System</h2>
+
+<div class="immunologyForm">
+
+<input type="text" id="patientName" placeholder="Patient Name">
+
+<input type="number" id="patientAge" placeholder="Age">
+
+<select id="allergyType">
+
+<option>Food Allergy</option>
+<option>Drug Allergy</option>
+<option>Dust Allergy</option>
+<option>Pollen Allergy</option>
+<option>Latex Allergy</option>
+<option>Insect Allergy</option>
+<option>Autoimmune Disease</option>
+<option>Immune Deficiency</option>
+
+</select>
+
+<select id="severity">
+
+<option>Mild</option>
+<option>Moderate</option>
+<option>Severe</option>
+<option>Anaphylaxis</option>
+
+</select>
+
+<select id="treatment">
+
+<option>Antihistamine</option>
+<option>Steroids</option>
+<option>Immunotherapy</option>
+<option>Epinephrine</option>
+<option>Biological Therapy</option>
+
+</select>
+
+<button onclick="saveImmunology()">
+
+🧬 Register Patient
+
+</button>
+
+</div>
+
+<div class="immunologyCards">
+
+<div class="immunologyCard">
+
+<h1 id="immunePatients">542</h1>
+
+<p>Total Patients</p>
+
+</div>
+
+<div class="immunologyCard">
+
+<h1 id="allergyCases">386</h1>
+
+<p>Allergy Cases</p>
+
+</div>
+
+<div class="immunologyCard">
+
+<h1 id="autoimmuneCases">98</h1>
+
+<p>Autoimmune Cases</p>
+
+</div>
+
+<div class="immunologyCard">
+
+<h1 id="criticalImmune">18</h1>
+
+<p>Critical Cases</p>
+
+</div>
+
+</div>
+
+<table class="immunologyTable">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Patient</th>
+
+<th>Diagnosis</th>
+
+<th>Severity</th>
+
+<th>Treatment</th>
+
+<th>AI Advice</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="immuneBody">
+
+<tr>
+
+<td>1</td>
+
+<td>Rahul</td>
+
+<td>Food Allergy</td>
+
+<td>Moderate</td>
+
+<td>Antihistamine</td>
+
+<td>Avoid Allergens</td>
+
+<td>
+
+<button onclick="viewImmunology(this)">View</button>
+
+<button onclick="printImmunology()">Print</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+<style>
+
+.immunologySection{
+
+padding:90px 8%;
+
+background:#f7fcff;
+
+}
+
+.immunologyForm{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:15px;
+
+margin-bottom:30px;
+
+}
+
+.immunologyForm input,
+.immunologyForm select{
+
+padding:14px;
+
+border:1px solid #ccc;
+
+border-radius:10px;
+
+}
+
+.immunologyForm button{
+
+padding:14px;
+
+background:#00897b;
+
+color:white;
+
+border:none;
+
+border-radius:10px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+.immunologyCards{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:20px;
+
+margin-bottom:30px;
+
+}
+
+.immunologyCard{
+
+background:white;
+
+padding:25px;
+
+text-align:center;
+
+border-radius:15px;
+
+box-shadow:0 8px 18px rgba(0,0,0,.08);
+
+}
+
+.immunologyCard h1{
+
+font-size:40px;
+
+color:#00897b;
+
+}
+
+.immunologyTable{
+
+width:100%;
+
+background:white;
+
+border-collapse:collapse;
+
+border-radius:15px;
+
+overflow:hidden;
+
+}
+
+.immunologyTable th{
+
+background:#00897b;
+
+color:white;
+
+padding:15px;
+
+}
+
+.immunologyTable td{
+
+padding:14px;
+
+text-align:center;
+
+border-bottom:1px solid #eee;
+
+}
+
+.immunologyTable button{
+
+padding:8px 12px;
+
+margin:2px;
+
+background:#00897b;
+
+color:white;
+
+border:none;
+
+border-radius:8px;
+
+cursor:pointer;
+
+}
+
+</style>
+
+<script>
+
+let immuneID=1;
+
+function saveImmunology(){
+
+let patient=document.getElementById("patientName").value;
+
+let diagnosis=document.getElementById("allergyType").value;
+
+let severity=document.getElementById("severity").value;
+
+let treatment=document.getElementById("treatment").value;
+
+if(patient==""){
+
+alert("Please enter patient name.");
+
+return;
+
+}
+
+let ai="Routine Follow-up";
+
+if(diagnosis=="Food Allergy")
+
+ai="Avoid Trigger Foods";
+
+if(diagnosis=="Drug Allergy")
+
+ai="Flag Drug in EMR";
+
+if(diagnosis=="Autoimmune Disease")
+
+ai="Rheumatology Consultation";
+
+if(diagnosis=="Immune Deficiency")
+
+ai="Immune Profile Monitoring";
+
+if(severity=="Anaphylaxis"){
+
+ai="Immediate Epinephrine & ICU";
+
+document.getElementById("criticalImmune").innerHTML=
+
+parseInt(document.getElementById("criticalImmune").innerHTML)+1;
+
+}
+
+immuneID++;
+
+let row="<tr>"+
+
+"<td>"+immuneID+"</td>"+
+
+"<td>"+patient+"</td>"+
+
+"<td>"+diagnosis+"</td>"+
+
+"<td>"+severity+"</td>"+
+
+"<td>"+treatment+"</td>"+
+
+"<td>"+ai+"</td>"+
+
+"<td><button onclick='viewImmunology(this)'>View</button> <button onclick='printImmunology()'>Print</button></td>"+
+
+"</tr>";
+
+document.getElementById("immuneBody").innerHTML+=row;
+
+document.getElementById("immunePatients").innerHTML=
+
+parseInt(document.getElementById("immunePatients").innerHTML)+1;
+
+if(diagnosis=="Autoimmune Disease"){
+
+document.getElementById("autoimmuneCases").innerHTML=
+
+parseInt(document.getElementById("autoimmuneCases").innerHTML)+1;
+
+}else{
+
+document.getElementById("allergyCases").innerHTML=
+
+parseInt(document.getElementById("allergyCases").innerHTML)+1;
+
+}
+
+alert("🧬 Immunology record added successfully.");
+
+}
+
+function viewImmunology(btn){
+
+let row=btn.parentElement.parentElement;
+
+alert(
+
+"Patient : "+row.cells[1].innerHTML+
+
+"\nDiagnosis : "+row.cells[2].innerHTML+
+
+"\nSeverity : "+row.cells[3].innerHTML+
+
+"\nTreatment : "+row.cells[4].innerHTML+
+
+"\nAI Advice : "+row.cells[5].innerHTML
+
+);
+
+}
+
+function printImmunology(){
+
+window.print();
+
+}
+
+</script>
+
+<!-- ================= HOME HEALTHCARE MANAGEMENT SYSTEM ================= -->
+
+<section class="homeCareSection">
+
+<h2 class="title">🏠 Home Healthcare Management System</h2>
+
+<div class="homeCareForm">
+
+<input type="text" id="patientName" placeholder="Patient Name">
+
+<input type="number" id="patientAge" placeholder="Age">
+
+<select id="serviceType">
+
+<option>Doctor Visit</option>
+<option>Nursing Care</option>
+<option>Physiotherapy</option>
+<option>Post Surgery Care</option>
+<option>Elder Care</option>
+<option>Palliative Care</option>
+<option>Vaccination</option>
+<option>Lab Sample Collection</option>
+
+</select>
+
+<select id="priority">
+
+<option>Normal</option>
+<option>Urgent</option>
+<option>Emergency</option>
+
+</select>
+
+<input type="date" id="visitDate">
+
+<select id="assignedStaff">
+
+<option>Dr. Kumar</option>
+<option>Nurse Priya</option>
+<option>Physio Arjun</option>
+<option>Home Care Team A</option>
+<option>Home Care Team B</option>
+
+</select>
+
+<button onclick="saveHomeCare()">
+
+🏠 Schedule Visit
+
+</button>
+
+</div>
+
+<div class="homeCards">
+
+<div class="homeCard">
+
+<h1 id="totalVisits">1248</h1>
+
+<p>Total Home Visits</p>
+
+</div>
+
+<div class="homeCard">
+
+<h1 id="todayVisits">42</h1>
+
+<p>Today's Visits</p>
+
+</div>
+
+<div class="homeCard">
+
+<h1 id="activePatients">318</h1>
+
+<p>Active Patients</p>
+
+</div>
+
+<div class="homeCard">
+
+<h1 id="completedVisits">965</h1>
+
+<p>Completed Visits</p>
+
+</div>
+
+</div>
+
+<table class="homeTable">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Patient</th>
+
+<th>Service</th>
+
+<th>Priority</th>
+
+<th>Visit Date</th>
+
+<th>Assigned Staff</th>
+
+<th>AI Suggestion</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="homeBody">
+
+<tr>
+
+<td>1</td>
+
+<td>Rahul</td>
+
+<td>Nursing Care</td>
+
+<td>Normal</td>
+
+<td>2026-07-30</td>
+
+<td>Nurse Priya</td>
+
+<td>Daily BP & Sugar Monitoring</td>
+
+<td>
+
+<button onclick="viewVisit(this)">View</button>
+
+<button onclick="printVisit()">Print</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+<style>
+
+.homeCareSection{
+
+padding:90px 8%;
+
+background:#f4fff8;
+
+}
+
+.homeCareForm{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:15px;
+
+margin-bottom:30px;
+
+}
+
+.homeCareForm input,
+.homeCareForm select{
+
+padding:14px;
+
+border:1px solid #ccc;
+
+border-radius:10px;
+
+}
+
+.homeCareForm button{
+
+padding:14px;
+
+background:#2e7d32;
+
+color:white;
+
+border:none;
+
+border-radius:10px;
+
+cursor:pointer;
+
+font-weight:bold;
+
+}
+
+.homeCards{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:20px;
+
+margin-bottom:30px;
+
+}
+
+.homeCard{
+
+background:white;
+
+padding:25px;
+
+text-align:center;
+
+border-radius:15px;
+
+box-shadow:0 8px 18px rgba(0,0,0,.08);
+
+}
+
+.homeCard h1{
+
+font-size:40px;
+
+color:#2e7d32;
+
+}
+
+.homeTable{
+
+width:100%;
+
+background:white;
+
+border-collapse:collapse;
+
+border-radius:15px;
+
+overflow:hidden;
+
+}
+
+.homeTable th{
+
+background:#2e7d32;
+
+color:white;
+
+padding:15px;
+
+}
+
+.homeTable td{
+
+padding:14px;
+
+text-align:center;
+
+border-bottom:1px solid #eee;
+
+}
+
+.homeTable button{
+
+padding:8px 12px;
+
+margin:2px;
+
+background:#2e7d32;
+
+color:white;
+
+border:none;
+
+border-radius:8px;
+
+cursor:pointer;
+
+}
+
+</style>
+
+<script>
+
+let visitID=1;
+
+function saveHomeCare(){
+
+let patient=document.getElementById("patientName").value;
+
+let service=document.getElementById("serviceType").value;
+
+let priority=document.getElementById("priority").value;
+
+let date=document.getElementById("visitDate").value;
+
+let staff=document.getElementById("assignedStaff").value;
+
+if(patient=="" || date==""){
+
+alert("Please fill all required fields.");
+
+return;
+
+}
+
+let ai="Routine Home Visit";
+
+if(service=="Nursing Care")
+ai="Daily BP & Sugar Monitoring";
+
+if(service=="Post Surgery Care")
+ai="Monitor Wound Dressing";
+
+if(service=="Physiotherapy")
+ai="Range of Motion Exercises";
+
+if(service=="Lab Sample Collection")
+ai="Send Sample to Laboratory";
+
+if(priority=="Emergency")
+ai="Dispatch Emergency Home Care Team";
+
+visitID++;
+
+let row="<tr>"+
+
+"<td>"+visitID+"</td>"+
+
+"<td>"+patient+"</td>"+
+
+"<td>"+service+"</td>"+
+
+"<td>"+priority+"</td>"+
+
+"<td>"+date+"</td>"+
+
+"<td>"+staff+"</td>"+
+
+"<td>"+ai+"</td>"+
+
+"<td><button onclick='viewVisit(this)'>View</button> <button onclick='printVisit()'>Print</button></td>"+
+
+"</tr>";
+
+document.getElementById("homeBody").innerHTML+=row;
+
+document.getElementById("totalVisits").innerHTML=
+
+parseInt(document.getElementById("totalVisits").innerHTML)+1;
+
+document.getElementById("activePatients").innerHTML=
+
+parseInt(document.getElementById("activePatients").innerHTML)+1;
+
+alert("🏠 Home Healthcare visit scheduled successfully.");
+
+}
+
+function viewVisit(btn){
+
+let row=btn.parentElement.parentElement;
+
+alert(
+
+"Patient : "+row.cells[1].innerHTML+
+
+"\nService : "+row.cells[2].innerHTML+
+
+"\nPriority : "+row.cells[3].innerHTML+
+
+"\nVisit Date : "+row.cells[4].innerHTML+
+
+"\nAssigned Staff : "+row.cells[5].innerHTML+
+
+"\nAI Suggestion : "+row.cells[6].innerHTML
+
+);
+
+}
+
+function printVisit(){
+
+window.print();
+
+}
+
+</script>
+<!-- ================= HOSPICE & PALLIATIVE CARE MANAGEMENT SYSTEM ================= -->
+
+<section class="hospiceSection">
+
+<h2 class="title">❤️ Hospice & Palliative Care Management System</h2>
+
+<div class="hospiceForm">
+
+<input type="text" id="patientName" placeholder="Patient Name">
+
+<input type="number" id="patientAge" placeholder="Age">
+
+<select id="diagnosis">
+
+<option>Cancer</option>
+<option>Heart Failure</option>
+<option>COPD</option>
+<option>Kidney Failure</option>
+<option>Liver Failure</option>
+<option>Neurological Disorder</option>
+<option>Dementia</option>
+<option>Other Chronic Illness</option>
+
+</select>
+
+<select id="painScore">
+
+<option>0 - No Pain</option>
+<option>1 - Mild</option>
+<option>2 - Moderate</option>
+<option>3 - Severe</option>
+<option>4 - Extreme</option>
+
+</select>
+
+<select id="carePlan">
+
+<option>Pain Management</option>
+<option>Home Hospice</option>
+<option>Inpatient Hospice</option>
+<option>Family Counseling</option>
+<option>End-of-Life Care</option>
+
+</select>
+
+<button onclick="saveHospice()">
+
+❤️ Register Patient
+
+</button>
+
+</div>
+
+<div class="hospiceCards">
+
+<div class="hospiceCard">
+
+<h1 id="totalHospice">486</h1>
+
+<p>Total Patients</p>
+
+</div>
+
+<div class="hospiceCard">
+
+<h1 id="homeHospice">194</h1>
+
+<p>Home Hospice</p>
+
+</div>
+
+<div class="hospiceCard">
+
+<h1 id="painCases">276</h1>
+
+<p>Pain Management</p>
+
+</div>
+
+<div class="hospiceCard">
+
+<h1 id="criticalCare">48</h1>
+
+<p>Critical Care</p>
+
+</div>
+
+</div>
+
+<table class="hospiceTable">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Patient</th>
+
+<th>Diagnosis</th>
+
+<th>Pain Score</th>
+
+<th>Care Plan</th>
+
+<th>AI Recommendation</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="hospiceBody">
+
+<tr>
+
+<td>1</td>
+
+<td>Ramesh</td>
+
+<td>Cancer</td>
+
+<td>3 - Severe</td>
+
+<td>Pain Management</td>
+
+<td>Opioid Assessment & Counseling</td>
+
+<td>
+
+<button onclick="viewHospice(this)">View</button>
+
+<button onclick="printHospice()">Print</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+<style>
+
+.hospiceSection{
+
+padding:90px 8%;
+
+background:#fff7fb;
+
+}
+
+.hospiceForm{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:15px;
+
+margin-bottom:30px;
+
+}
+
+.hospiceForm input,
+.hospiceForm select{
+
+padding:14px;
+
+border:1px solid #ccc;
+
+border-radius:10px;
+
+}
+
+.hospiceForm button{
+
+padding:14px;
+
+background:#ad1457;
+
+color:white;
+
+border:none;
+
+border-radius:10px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+.hospiceCards{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:20px;
+
+margin-bottom:30px;
+
+}
+
+.hospiceCard{
+
+background:white;
+
+padding:25px;
+
+text-align:center;
+
+border-radius:15px;
+
+box-shadow:0 8px 18px rgba(0,0,0,.08);
+
+}
+
+.hospiceCard h1{
+
+font-size:40px;
+
+color:#ad1457;
+
+}
+
+.hospiceTable{
+
+width:100%;
+
+background:white;
+
+border-collapse:collapse;
+
+border-radius:15px;
+
+overflow:hidden;
+
+}
+
+.hospiceTable th{
+
+background:#ad1457;
+
+color:white;
+
+padding:15px;
+
+}
+
+.hospiceTable td{
+
+padding:14px;
+
+text-align:center;
+
+border-bottom:1px solid #eee;
+
+}
+
+.hospiceTable button{
+
+padding:8px 12px;
+
+margin:2px;
+
+background:#ad1457;
+
+color:white;
+
+border:none;
+
+border-radius:8px;
+
+cursor:pointer;
+
+}
+
+</style>
+
+<script>
+
+let hospiceID=1;
+
+function saveHospice(){
+
+let patient=document.getElementById("patientName").value;
+
+let diagnosis=document.getElementById("diagnosis").value;
+
+let pain=document.getElementById("painScore").value;
+
+let care=document.getElementById("carePlan").value;
+
+if(patient==""){
+
+alert("Please enter patient name.");
+
+return;
+
+}
+
+let ai="Routine Follow-up";
+
+if(care=="Pain Management")
+ai="Optimize Pain Medication";
+
+if(care=="Home Hospice")
+ai="Schedule Weekly Home Visit";
+
+if(care=="Family Counseling")
+ai="Psychological Support Session";
+
+if(care=="End-of-Life Care")
+ai="Comfort Care Protocol";
+
+if(pain.includes("Severe") || pain.includes("Extreme")){
+
+document.getElementById("criticalCare").innerHTML=
+
+parseInt(document.getElementById("criticalCare").innerHTML)+1;
+
+ai="Immediate Pain Specialist Review";
+
+}
+
+hospiceID++;
+
+let row="<tr>"+
+
+"<td>"+hospiceID+"</td>"+
+
+"<td>"+patient+"</td>"+
+
+"<td>"+diagnosis+"</td>"+
+
+"<td>"+pain+"</td>"+
+
+"<td>"+care+"</td>"+
+
+"<td>"+ai+"</td>"+
+
+"<td><button onclick='viewHospice(this)'>View</button> <button onclick='printHospice()'>Print</button></td>"+
+
+"</tr>";
+
+document.getElementById("hospiceBody").innerHTML+=row;
+
+document.getElementById("totalHospice").innerHTML=
+
+parseInt(document.getElementById("totalHospice").innerHTML)+1;
+
+if(care=="Home Hospice"){
+
+document.getElementById("homeHospice").innerHTML=
+
+parseInt(document.getElementById("homeHospice").innerHTML)+1;
+
+}
+
+if(care=="Pain Management"){
+
+document.getElementById("painCases").innerHTML=
+
+parseInt(document.getElementById("painCases").innerHTML)+1;
+
+}
+
+alert("❤️ Hospice patient registered successfully.");
+
+}
+
+function viewHospice(btn){
+
+let row=btn.parentElement.parentElement;
+
+alert(
+
+"Patient : "+row.cells[1].innerHTML+
+
+"\nDiagnosis : "+row.cells[2].innerHTML+
+
+"\nPain Score : "+row.cells[3].innerHTML+
+
+"\nCare Plan : "+row.cells[4].innerHTML+
+
+"\nAI Recommendation : "+row.cells[5].innerHTML
+
+);
+
+}
+
+function printHospice(){
+
+window.print();
+
+}
+
+</script>
+
+<!-- ================= MOBILE MEDICAL UNIT MANAGEMENT SYSTEM ================= -->
+
+<section class="mobileUnitSection">
+
+<h2 class="title">🚐 Mobile Medical Unit Management System</h2>
+
+<div class="mobileForm">
+
+<input type="text" id="campName" placeholder="Medical Camp Name">
+
+<input type="text" id="location" placeholder="Camp Location">
+
+<input type="date" id="campDate">
+
+<select id="serviceType">
+
+<option>General Health Camp</option>
+<option>Eye Screening</option>
+<option>Dental Camp</option>
+<option>Vaccination Camp</option>
+<option>Women's Health Camp</option>
+<option>Child Health Camp</option>
+<option>Diabetes Screening</option>
+<option>Cardiac Screening</option>
+
+</select>
+
+<select id="vehicle">
+
+<option>Mobile Unit 01</option>
+<option>Mobile Unit 02</option>
+<option>Mobile Unit 03</option>
+<option>Mobile Clinic Bus</option>
+
+</select>
+
+<button onclick="scheduleCamp()">
+
+🚐 Schedule Camp
+
+</button>
+
+</div>
+
+<div class="mobileCards">
+
+<div class="mobileCard">
+
+<h1 id="totalCamps">214</h1>
+
+<p>Total Camps</p>
+
+</div>
+
+<div class="mobileCard">
+
+<h1 id="todayCamp">8</h1>
+
+<p>Today's Camps</p>
+
+</div>
+
+<div class="mobileCard">
+
+<h1 id="patientsScreened">18462</h1>
+
+<p>Patients Screened</p>
+
+</div>
+
+<div class="mobileCard">
+
+<h1 id="mobileUnits">4</h1>
+
+<p>Available Units</p>
+
+</div>
+
+</div>
+
+<table class="mobileTable">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Camp</th>
+
+<th>Location</th>
+
+<th>Date</th>
+
+<th>Service</th>
+
+<th>Vehicle</th>
+
+<th>AI Suggestion</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="mobileBody">
+
+<tr>
+
+<td>1</td>
+
+<td>Village Health Camp</td>
+
+<td>Coimbatore</td>
+
+<td>2026-07-30</td>
+
+<td>General Health Camp</td>
+
+<td>Mobile Unit 01</td>
+
+<td>Carry Emergency Medicines</td>
+
+<td>
+
+<button onclick="viewCamp(this)">View</button>
+
+<button onclick="printCamp()">Print</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+<style>
+
+.mobileUnitSection{
+
+padding:90px 8%;
+
+background:#f4fbff;
+
+}
+
+.mobileForm{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:15px;
+
+margin-bottom:30px;
+
+}
+
+.mobileForm input,
+.mobileForm select{
+
+padding:14px;
+
+border:1px solid #ccc;
+
+border-radius:10px;
+
+}
+
+.mobileForm button{
+
+padding:14px;
+
+background:#0277bd;
+
+color:white;
+
+border:none;
+
+border-radius:10px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+.mobileCards{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:20px;
+
+margin-bottom:30px;
+
+}
+
+.mobileCard{
+
+background:white;
+
+padding:25px;
+
+text-align:center;
+
+border-radius:15px;
+
+box-shadow:0 8px 18px rgba(0,0,0,.08);
+
+}
+
+.mobileCard h1{
+
+font-size:40px;
+
+color:#0277bd;
+
+}
+
+.mobileTable{
+
+width:100%;
+
+background:white;
+
+border-collapse:collapse;
+
+border-radius:15px;
+
+overflow:hidden;
+
+}
+
+.mobileTable th{
+
+background:#0277bd;
+
+color:white;
+
+padding:15px;
+
+}
+
+.mobileTable td{
+
+padding:14px;
+
+text-align:center;
+
+border-bottom:1px solid #eee;
+
+}
+
+.mobileTable button{
+
+padding:8px 12px;
+
+margin:2px;
+
+background:#0277bd;
+
+color:white;
+
+border:none;
+
+border-radius:8px;
+
+cursor:pointer;
+
+}
+
+</style>
+
+<script>
+
+let campID=1;
+
+function scheduleCamp(){
+
+let camp=document.getElementById("campName").value;
+
+let location=document.getElementById("location").value;
+
+let date=document.getElementById("campDate").value;
+
+let service=document.getElementById("serviceType").value;
+
+let vehicle=document.getElementById("vehicle").value;
+
+if(camp=="" || location=="" || date==""){
+
+alert("Please complete all fields.");
+
+return;
+
+}
+
+let ai="Standard Medical Kit";
+
+if(service=="Vaccination Camp")
+ai="Carry Vaccine Cold Chain Box";
+
+if(service=="Eye Screening")
+ai="Include Portable Slit Lamp";
+
+if(service=="Dental Camp")
+ai="Carry Portable Dental Chair";
+
+if(service=="Cardiac Screening")
+ai="Carry ECG Machine";
+
+if(service=="Diabetes Screening")
+ai="Carry Glucometers & Test Strips";
+
+campID++;
+
+let row="<tr>"+
+
+"<td>"+campID+"</td>"+
+
+"<td>"+camp+"</td>"+
+
+"<td>"+location+"</td>"+
+
+"<td>"+date+"</td>"+
+
+"<td>"+service+"</td>"+
+
+"<td>"+vehicle+"</td>"+
+
+"<td>"+ai+"</td>"+
+
+"<td><button onclick='viewCamp(this)'>View</button> <button onclick='printCamp()'>Print</button></td>"+
+
+"</tr>";
+
+document.getElementById("mobileBody").innerHTML+=row;
+
+document.getElementById("totalCamps").innerHTML=
+
+parseInt(document.getElementById("totalCamps").innerHTML)+1;
+
+alert("🚐 Mobile medical camp scheduled successfully.");
+
+}
+
+function viewCamp(btn){
+
+let row=btn.parentElement.parentElement;
+
+alert(
+
+"Camp : "+row.cells[1].innerHTML+
+
+"\nLocation : "+row.cells[2].innerHTML+
+
+"\nDate : "+row.cells[3].innerHTML+
+
+"\nService : "+row.cells[4].innerHTML+
+
+"\nVehicle : "+row.cells[5].innerHTML+
+
+"\nAI Suggestion : "+row.cells[6].innerHTML
+
+);
+
+}
+
+function printCamp(){
+
+window.print();
+
+}
+
+</script>
+
+<!-- ================= DIET & NUTRITION MANAGEMENT SYSTEM ================= -->
+
+<section class="nutritionSection">
+
+<h2 class="title">🍽️ Diet & Nutrition Management System</h2>
+
+<div class="nutritionForm">
+
+<input type="text" id="patientName" placeholder="Patient Name">
+
+<input type="number" id="patientAge" placeholder="Age">
+
+<select id="dietCategory">
+
+<option>General Diet</option>
+<option>Diabetic Diet</option>
+<option>Renal Diet</option>
+<option>Cardiac Diet</option>
+<option>Weight Loss Diet</option>
+<option>Weight Gain Diet</option>
+<option>High Protein Diet</option>
+<option>Pediatric Diet</option>
+
+</select>
+
+<select id="nutritionRisk">
+
+<option>Low</option>
+<option>Moderate</option>
+<option>High</option>
+<option>Critical</option>
+
+</select>
+
+<input type="number" id="bmi" placeholder="BMI">
+
+<select id="dietitian">
+
+<option>Dietitian Priya</option>
+<option>Dietitian Harish</option>
+<option>Dietitian Kavya</option>
+<option>Dietitian Meena</option>
+
+</select>
+
+<button onclick="saveNutrition()">
+
+🍽️ Create Diet Plan
+
+</button>
+
+</div>
+
+<div class="nutritionCards">
+
+<div class="nutritionCard">
+
+<h1 id="nutritionPatients">982</h1>
+
+<p>Total Patients</p>
+
+</div>
+
+<div class="nutritionCard">
+
+<h1 id="dietPlans">841</h1>
+
+<p>Diet Plans</p>
+
+</div>
+
+<div class="nutritionCard">
+
+<h1 id="criticalNutrition">36</h1>
+
+<p>Critical Nutrition</p>
+
+</div>
+
+<div class="nutritionCard">
+
+<h1 id="followUps">274</h1>
+
+<p>Follow-ups</p>
+
+</div>
+
+</div>
+
+<table class="nutritionTable">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Patient</th>
+
+<th>Diet</th>
+
+<th>BMI</th>
+
+<th>Risk</th>
+
+<th>AI Recommendation</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="nutritionBody">
+
+<tr>
+
+<td>1</td>
+
+<td>Anitha</td>
+
+<td>Diabetic Diet</td>
+
+<td>31</td>
+
+<td>High</td>
+
+<td>Reduce Sugar & Weekly Review</td>
+
+<td>
+
+<button onclick="viewNutrition(this)">View</button>
+
+<button onclick="printNutrition()">Print</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+<style>
+
+.nutritionSection{
+padding:90px 8%;
+background:#fffef5;
+}
+
+.nutritionForm{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+margin-bottom:30px;
+}
+
+.nutritionForm input,
+.nutritionForm select{
+padding:14px;
+border:1px solid #ccc;
+border-radius:10px;
+}
+
+.nutritionForm button{
+padding:14px;
+background:#43a047;
+color:white;
+border:none;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.nutritionCards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-bottom:30px;
+}
+
+.nutritionCard{
+background:white;
+padding:25px;
+text-align:center;
+border-radius:15px;
+box-shadow:0 8px 18px rgba(0,0,0,.08);
+}
+
+.nutritionCard h1{
+font-size:40px;
+color:#43a047;
+}
+
+.nutritionTable{
+width:100%;
+border-collapse:collapse;
+background:white;
+border-radius:15px;
+overflow:hidden;
+}
+
+.nutritionTable th{
+background:#43a047;
+color:white;
+padding:15px;
+}
+
+.nutritionTable td{
+padding:14px;
+text-align:center;
+border-bottom:1px solid #eee;
+}
+
+.nutritionTable button{
+padding:8px 12px;
+margin:2px;
+background:#43a047;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+</style>
+
+<script>
+
+let nutritionID=1;
+
+function saveNutrition(){
+
+let patient=document.getElementById("patientName").value;
+let diet=document.getElementById("dietCategory").value;
+let bmi=document.getElementById("bmi").value;
+let risk=document.getElementById("nutritionRisk").value;
+
+if(patient=="" || bmi==""){
+
+alert("Please complete all required fields.");
+return;
+
+}
+
+let ai="Balanced Nutrition Plan";
+
+if(diet=="Diabetic Diet")
+ai="Reduce Sugar & Monitor HbA1c";
+
+if(diet=="Cardiac Diet")
+ai="Low Sodium & Low Fat Diet";
+
+if(diet=="Renal Diet")
+ai="Restrict Potassium & Phosphorus";
+
+if(diet=="Weight Loss Diet")
+ai="Calorie Deficit + Exercise";
+
+if(diet=="Weight Gain Diet")
+ai="Increase Protein & Calories";
+
+if(risk=="Critical"){
+
+ai="Immediate Clinical Nutrition Consultation";
+
+document.getElementById("criticalNutrition").innerHTML=
+parseInt(document.getElementById("criticalNutrition").innerHTML)+1;
+
+}
+
+nutritionID++;
+
+let row="<tr>"+
+"<td>"+nutritionID+"</td>"+
+"<td>"+patient+"</td>"+
+"<td>"+diet+"</td>"+
+"<td>"+bmi+"</td>"+
+"<td>"+risk+"</td>"+
+"<td>"+ai+"</td>"+
+"<td><button onclick='viewNutrition(this)'>View</button> <button onclick='printNutrition()'>Print</button></td>"+
+"</tr>";
+
+document.getElementById("nutritionBody").innerHTML+=row;
+
+document.getElementById("nutritionPatients").innerHTML=
+parseInt(document.getElementById("nutritionPatients").innerHTML)+1;
+
+document.getElementById("dietPlans").innerHTML=
+parseInt(document.getElementById("dietPlans").innerHTML)+1;
+
+alert("🍽️ Diet plan created successfully.");
+
+}
+
+function viewNutrition(btn){
+
+let row=btn.parentElement.parentElement;
+
+alert(
+"Patient : "+row.cells[1].innerHTML+
+"\nDiet : "+row.cells[2].innerHTML+
+"\nBMI : "+row.cells[3].innerHTML+
+"\nRisk : "+row.cells[4].innerHTML+
+"\nAI Recommendation : "+row.cells[5].innerHTML
+);
+
+}
+
+function printNutrition(){
+
+window.print();
+
+}
+
+</script>
+<!-- ================= PHYSIOTHERAPY & REHABILITATION MANAGEMENT SYSTEM ================= -->
+
+<section class="physioSection">
+
+<h2 class="title">🧘 Physiotherapy & Rehabilitation Management System</h2>
+
+<div class="physioForm">
+
+<input type="text" id="patientName" placeholder="Patient Name">
+
+<input type="number" id="patientAge" placeholder="Age">
+
+<select id="condition">
+
+<option>Stroke Rehabilitation</option>
+<option>Post Surgery Rehabilitation</option>
+<option>Sports Injury</option>
+<option>Back Pain</option>
+<option>Neck Pain</option>
+<option>Arthritis</option>
+<option>Fracture Recovery</option>
+<option>Neurological Rehabilitation</option>
+
+</select>
+
+<select id="therapyType">
+
+<option>Exercise Therapy</option>
+<option>Manual Therapy</option>
+<option>Electrotherapy</option>
+<option>Hydrotherapy</option>
+<option>Gait Training</option>
+<option>Balance Training</option>
+
+</select>
+
+<select id="sessionStatus">
+
+<option>Scheduled</option>
+<option>In Progress</option>
+<option>Completed</option>
+
+</select>
+
+<button onclick="savePhysio()">
+
+🧘 Schedule Therapy
+
+</button>
+
+</div>
+
+<div class="physioCards">
+
+<div class="physioCard">
+
+<h1 id="totalPhysio">762</h1>
+
+<p>Total Patients</p>
+
+</div>
+
+<div class="physioCard">
+
+<h1 id="todaySessions">58</h1>
+
+<p>Today's Sessions</p>
+
+</div>
+
+<div class="physioCard">
+
+<h1 id="completedTherapy">495</h1>
+
+<p>Completed Therapy</p>
+
+</div>
+
+<div class="physioCard">
+
+<h1 id="activeRehab">184</h1>
+
+<p>Active Rehabilitation</p>
+
+</div>
+
+</div>
+
+<table class="physioTable">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Patient</th>
+
+<th>Condition</th>
+
+<th>Therapy</th>
+
+<th>Status</th>
+
+<th>AI Recommendation</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="physioBody">
+
+<tr>
+
+<td>1</td>
+
+<td>Arun</td>
+
+<td>Stroke Rehabilitation</td>
+
+<td>Gait Training</td>
+
+<td>Scheduled</td>
+
+<td>Daily Walking Practice & Balance Exercises</td>
+
+<td>
+
+<button onclick="viewPhysio(this)">View</button>
+
+<button onclick="printPhysio()">Print</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+<style>
+
+.physioSection{
+padding:90px 8%;
+background:#f5fffc;
+}
+
+.physioForm{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+margin-bottom:30px;
+}
+
+.physioForm input,
+.physioForm select{
+padding:14px;
+border:1px solid #ccc;
+border-radius:10px;
+}
+
+.physioForm button{
+padding:14px;
+background:#009688;
+color:white;
+border:none;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.physioCards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-bottom:30px;
+}
+
+.physioCard{
+background:white;
+padding:25px;
+text-align:center;
+border-radius:15px;
+box-shadow:0 8px 18px rgba(0,0,0,.08);
+}
+
+.physioCard h1{
+font-size:40px;
+color:#009688;
+}
+
+.physioTable{
+width:100%;
+background:white;
+border-collapse:collapse;
+border-radius:15px;
+overflow:hidden;
+}
+
+.physioTable th{
+background:#009688;
+color:white;
+padding:15px;
+}
+
+.physioTable td{
+padding:14px;
+text-align:center;
+border-bottom:1px solid #eee;
+}
+
+.physioTable button{
+padding:8px 12px;
+margin:2px;
+background:#009688;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+</style>
+
+<script>
+
+let physioID=1;
+
+function savePhysio(){
+
+let patient=document.getElementById("patientName").value;
+let condition=document.getElementById("condition").value;
+let therapy=document.getElementById("therapyType").value;
+let status=document.getElementById("sessionStatus").value;
+
+if(patient==""){
+
+alert("Please enter patient name.");
+return;
+
+}
+
+let ai="Continue Rehabilitation Plan";
+
+if(condition=="Stroke Rehabilitation")
+ai="Daily Walking Practice & Balance Exercises";
+
+if(condition=="Post Surgery Rehabilitation")
+ai="Gradual Range of Motion Exercises";
+
+if(condition=="Sports Injury")
+ai="Strengthening & Return-to-Sport Protocol";
+
+if(condition=="Back Pain")
+ai="Core Strengthening Exercises";
+
+if(condition=="Neck Pain")
+ai="Posture Correction & Stretching";
+
+if(condition=="Arthritis")
+ai="Low Impact Joint Mobility Exercises";
+
+if(condition=="Fracture Recovery")
+ai="Progressive Weight Bearing";
+
+if(condition=="Neurological Rehabilitation")
+ai="Motor Function & Coordination Training";
+
+physioID++;
+
+let row="<tr>"+
+"<td>"+physioID+"</td>"+
+"<td>"+patient+"</td>"+
+"<td>"+condition+"</td>"+
+"<td>"+therapy+"</td>"+
+"<td>"+status+"</td>"+
+"<td>"+ai+"</td>"+
+"<td><button onclick='viewPhysio(this)'>View</button> <button onclick='printPhysio()'>Print</button></td>"+
+"</tr>";
+
+document.getElementById("physioBody").innerHTML+=row;
+
+document.getElementById("totalPhysio").innerHTML=
+parseInt(document.getElementById("totalPhysio").innerHTML)+1;
+
+if(status=="Completed"){
+
+document.getElementById("completedTherapy").innerHTML=
+parseInt(document.getElementById("completedTherapy").innerHTML)+1;
+
+}else{
+
+document.getElementById("activeRehab").innerHTML=
+parseInt(document.getElementById("activeRehab").innerHTML)+1;
+
+}
+
+alert("🧘 Physiotherapy session scheduled successfully.");
+
+}
+
+function viewPhysio(btn){
+
+let row=btn.parentElement.parentElement;
+
+alert(
+
+"Patient : "+row.cells[1].innerHTML+
+"\nCondition : "+row.cells[2].innerHTML+
+"\nTherapy : "+row.cells[3].innerHTML+
+"\nStatus : "+row.cells[4].innerHTML+
+"\nAI Recommendation : "+row.cells[5].innerHTML
+
+);
+
+}
+
+function printPhysio(){
+
+window.print();
+
+}
+
+</script>
+<!-- ================= PAIN MANAGEMENT CLINIC SYSTEM ================= -->
+
+<section class="painSection">
+
+<h2 class="title">🩺 Pain Management Clinic System</h2>
+
+<div class="painForm">
+
+<input type="text" id="patientName" placeholder="Patient Name">
+
+<input type="number" id="patientAge" placeholder="Age">
+
+<select id="painType">
+
+<option>Chronic Back Pain</option>
+<option>Neck Pain</option>
+<option>Cancer Pain</option>
+<option>Neuropathic Pain</option>
+<option>Joint Pain</option>
+<option>Migraine</option>
+<option>Post Surgery Pain</option>
+<option>Fibromyalgia</option>
+
+</select>
+
+<select id="painScore">
+
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+<option>6</option>
+<option>7</option>
+<option>8</option>
+<option>9</option>
+<option>10</option>
+
+</select>
+
+<select id="treatment">
+
+<option>Medication</option>
+<option>Nerve Block</option>
+<option>Physiotherapy</option>
+<option>Radiofrequency Ablation</option>
+<option>Epidural Injection</option>
+<option>Counseling</option>
+<option>Pain Rehabilitation</option>
+
+</select>
+
+<button onclick="savePainCase()">
+
+🩺 Register Patient
+
+</button>
+
+</div>
+
+<div class="painCards">
+
+<div class="painCard">
+
+<h1 id="totalPainPatients">684</h1>
+
+<p>Total Patients</p>
+
+</div>
+
+<div class="painCard">
+
+<h1 id="severePainCases">112</h1>
+
+<p>Severe Pain Cases</p>
+
+</div>
+
+<div class="painCard">
+
+<h1 id="activeTreatments">248</h1>
+
+<p>Active Treatments</p>
+
+</div>
+
+<div class="painCard">
+
+<h1 id="completedPainTherapy">324</h1>
+
+<p>Completed Therapy</p>
+
+</div>
+
+</div>
+
+<table class="painTable">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Patient</th>
+
+<th>Pain Type</th>
+
+<th>Pain Score</th>
+
+<th>Treatment</th>
+
+<th>AI Recommendation</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="painBody">
+
+<tr>
+
+<td>1</td>
+
+<td>Suresh</td>
+
+<td>Chronic Back Pain</td>
+
+<td>8</td>
+
+<td>Physiotherapy</td>
+
+<td>MRI Review + Core Strengthening</td>
+
+<td>
+
+<button onclick="viewPain(this)">View</button>
+
+<button onclick="printPain()">Print</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+<style>
+
+.painSection{
+padding:90px 8%;
+background:#fff8f5;
+}
+
+.painForm{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+margin-bottom:30px;
+}
+
+.painForm input,
+.painForm select{
+padding:14px;
+border:1px solid #ccc;
+border-radius:10px;
+}
+
+.painForm button{
+padding:14px;
+background:#d84315;
+color:#fff;
+border:none;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.painCards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-bottom:30px;
+}
+
+.painCard{
+background:#fff;
+padding:25px;
+text-align:center;
+border-radius:15px;
+box-shadow:0 8px 18px rgba(0,0,0,.08);
+}
+
+.painCard h1{
+font-size:40px;
+color:#d84315;
+}
+
+.painTable{
+width:100%;
+border-collapse:collapse;
+background:#fff;
+border-radius:15px;
+overflow:hidden;
+}
+
+.painTable th{
+background:#d84315;
+color:#fff;
+padding:15px;
+}
+
+.painTable td{
+padding:14px;
+text-align:center;
+border-bottom:1px solid #eee;
+}
+
+.painTable button{
+padding:8px 12px;
+margin:2px;
+background:#d84315;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+</style>
+
+<script>
+
+let painID=1;
+
+function savePainCase(){
+
+let patient=document.getElementById("patientName").value;
+let painType=document.getElementById("painType").value;
+let score=parseInt(document.getElementById("painScore").value);
+let treatment=document.getElementById("treatment").value;
+
+if(patient==""){
+
+alert("Please enter patient name.");
+return;
+
+}
+
+let ai="Routine Pain Clinic Follow-up";
+
+if(painType=="Chronic Back Pain")
+ai="MRI Review + Core Strengthening";
+
+if(painType=="Cancer Pain")
+ai="WHO Pain Ladder Assessment";
+
+if(painType=="Migraine")
+ai="Trigger Avoidance & Preventive Therapy";
+
+if(painType=="Neuropathic Pain")
+ai="Neurology Consultation";
+
+if(treatment=="Nerve Block")
+ai="Ultrasound Guided Nerve Block";
+
+if(treatment=="Radiofrequency Ablation")
+ai="Confirm Imaging Before Procedure";
+
+if(score>=8){
+
+ai="Urgent Pain Specialist Review";
+
+document.getElementById("severePainCases").innerHTML=
+parseInt(document.getElementById("severePainCases").innerHTML)+1;
+
+}
+
+painID++;
+
+let row="<tr>"+
+"<td>"+painID+"</td>"+
+"<td>"+patient+"</td>"+
+"<td>"+painType+"</td>"+
+"<td>"+score+"</td>"+
+"<td>"+treatment+"</td>"+
+"<td>"+ai+"</td>"+
+"<td><button onclick='viewPain(this)'>View</button> <button onclick='printPain()'>Print</button></td>"+
+"</tr>";
+
+document.getElementById("painBody").innerHTML+=row;
+
+document.getElementById("totalPainPatients").innerHTML=
+parseInt(document.getElementById("totalPainPatients").innerHTML)+1;
+
+document.getElementById("activeTreatments").innerHTML=
+parseInt(document.getElementById("activeTreatments").innerHTML)+1;
+
+alert("🩺 Pain management record created successfully.");
+
+}
+
+function viewPain(btn){
+
+let row=btn.parentElement.parentElement;
+
+alert(
+
+"Patient : "+row.cells[1].innerHTML+
+"\nPain Type : "+row.cells[2].innerHTML+
+"\nPain Score : "+row.cells[3].innerHTML+
+"\nTreatment : "+row.cells[4].innerHTML+
+"\nAI Recommendation : "+row.cells[5].innerHTML
+
+);
+
+}
+
+function printPain(){
+
+window.print();
+
+}
+
+</script>
+<!-- ================= CLINICAL RESEARCH & TRIAL MANAGEMENT SYSTEM ================= -->
+
+<section class="researchSection">
+
+<h2 class="title">🧪 Clinical Research & Trial Management System</h2>
+
+<div class="researchForm">
+
+<input type="text" id="studyName" placeholder="Clinical Trial Name">
+
+<input type="text" id="principalInvestigator" placeholder="Principal Investigator">
+
+<select id="trialPhase">
+
+<option>Phase I</option>
+<option>Phase II</option>
+<option>Phase III</option>
+<option>Phase IV</option>
+<option>Observational Study</option>
+<option>Registry Study</option>
+
+</select>
+
+<select id="trialStatus">
+
+<option>Recruiting</option>
+<option>Screening</option>
+<option>Active</option>
+<option>Completed</option>
+<option>Suspended</option>
+
+</select>
+
+<input type="number" id="participants" placeholder="Participants">
+
+<button onclick="saveTrial()">
+
+🧪 Register Trial
+
+</button>
+
+</div>
+
+<div class="researchCards">
+
+<div class="researchCard">
+
+<h1 id="totalTrials">84</h1>
+
+<p>Total Trials</p>
+
+</div>
+
+<div class="researchCard">
+
+<h1 id="activeTrials">41</h1>
+
+<p>Active Trials</p>
+
+</div>
+
+<div class="researchCard">
+
+<h1 id="participantsCount">1284</h1>
+
+<p>Participants</p>
+
+</div>
+
+<div class="researchCard">
+
+<h1 id="completedTrials">29</h1>
+
+<p>Completed Trials</p>
+
+</div>
+
+</div>
+
+<table class="researchTable">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Study</th>
+
+<th>Investigator</th>
+
+<th>Phase</th>
+
+<th>Status</th>
+
+<th>Participants</th>
+
+<th>AI Recommendation</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="researchBody">
+
+<tr>
+
+<td>1</td>
+
+<td>Diabetes AI Study</td>
+
+<td>Dr. Kumar</td>
+
+<td>Phase III</td>
+
+<td>Active</td>
+
+<td>180</td>
+
+<td>Monitor Safety Reports Weekly</td>
+
+<td>
+
+<button onclick="viewTrial(this)">View</button>
+
+<button onclick="printTrial()">Print</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+<style>
+
+.researchSection{
+padding:90px 8%;
+background:#f8fcff;
+}
+
+.researchForm{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+margin-bottom:30px;
+}
+
+.researchForm input,
+.researchForm select{
+padding:14px;
+border:1px solid #ccc;
+border-radius:10px;
+}
+
+.researchForm button{
+padding:14px;
+background:#3949ab;
+color:white;
+border:none;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.researchCards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-bottom:30px;
+}
+
+.researchCard{
+background:white;
+padding:25px;
+text-align:center;
+border-radius:15px;
+box-shadow:0 8px 18px rgba(0,0,0,.08);
+}
+
+.researchCard h1{
+font-size:40px;
+color:#3949ab;
+}
+
+.researchTable{
+width:100%;
+background:white;
+border-collapse:collapse;
+border-radius:15px;
+overflow:hidden;
+}
+
+.researchTable th{
+background:#3949ab;
+color:white;
+padding:15px;
+}
+
+.researchTable td{
+padding:14px;
+text-align:center;
+border-bottom:1px solid #eee;
+}
+
+.researchTable button{
+padding:8px 12px;
+margin:2px;
+background:#3949ab;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+</style>
+
+<script>
+
+let trialID=1;
+
+function saveTrial(){
+
+let study=document.getElementById("studyName").value;
+let investigator=document.getElementById("principalInvestigator").value;
+let phase=document.getElementById("trialPhase").value;
+let status=document.getElementById("trialStatus").value;
+let participants=parseInt(document.getElementById("participants").value||0);
+
+if(study=="" || investigator==""){
+
+alert("Please complete all required fields.");
+return;
+
+}
+
+let ai="Routine Trial Monitoring";
+
+if(phase=="Phase I")
+ai="Monitor Initial Safety Closely";
+
+if(phase=="Phase II")
+ai="Evaluate Dose & Efficacy";
+
+if(phase=="Phase III")
+ai="Weekly Safety Report Review";
+
+if(phase=="Phase IV")
+ai="Post-Marketing Surveillance";
+
+if(status=="Recruiting")
+ai="Verify Inclusion & Exclusion Criteria";
+
+if(status=="Completed")
+ai="Prepare Final Study Report";
+
+trialID++;
+
+let row="<tr>"+
+"<td>"+trialID+"</td>"+
+"<td>"+study+"</td>"+
+"<td>"+investigator+"</td>"+
+"<td>"+phase+"</td>"+
+"<td>"+status+"</td>"+
+"<td>"+participants+"</td>"+
+"<td>"+ai+"</td>"+
+"<td><button onclick='viewTrial(this)'>View</button> <button onclick='printTrial()'>Print</button></td>"+
+"</tr>";
+
+document.getElementById("researchBody").innerHTML+=row;
+
+document.getElementById("totalTrials").innerHTML=
+parseInt(document.getElementById("totalTrials").innerHTML)+1;
+
+document.getElementById("participantsCount").innerHTML=
+parseInt(document.getElementById("participantsCount").innerHTML)+participants;
+
+if(status=="Active"){
+
+document.getElementById("activeTrials").innerHTML=
+parseInt(document.getElementById("activeTrials").innerHTML)+1;
+
+}
+
+if(status=="Completed"){
+
+document.getElementById("completedTrials").innerHTML=
+parseInt(document.getElementById("completedTrials").innerHTML)+1;
+
+}
+
+alert("🧪 Clinical trial registered successfully.");
+
+}
+
+function viewTrial(btn){
+
+let row=btn.parentElement.parentElement;
+
+alert(
+
+"Study : "+row.cells[1].innerHTML+
+"\nPrincipal Investigator : "+row.cells[2].innerHTML+
+"\nPhase : "+row.cells[3].innerHTML+
+"\nStatus : "+row.cells[4].innerHTML+
+"\nParticipants : "+row.cells[5].innerHTML+
+"\nAI Recommendation : "+row.cells[6].innerHTML
+
+);
+
+}
+
+function printTrial(){
+
+window.print();
+
+}
+
+</script>
+<!-- ================= PRECISION MEDICINE MANAGEMENT SYSTEM ================= -->
+
+<section class="precisionSection">
+
+<h2 class="title">🧬 Precision Medicine Management System</h2>
+
+<div class="precisionForm">
+
+<input type="text" id="patientName" placeholder="Patient Name">
+
+<input type="number" id="patientAge" placeholder="Age">
+
+<select id="disease">
+
+<option>Breast Cancer</option>
+<option>Lung Cancer</option>
+<option>Colorectal Cancer</option>
+<option>Leukemia</option>
+<option>Rare Genetic Disease</option>
+<option>Cardiovascular Disorder</option>
+<option>Neurological Disorder</option>
+<option>Inherited Metabolic Disorder</option>
+
+</select>
+
+<select id="geneticTest">
+
+<option>Whole Genome Sequencing</option>
+<option>Whole Exome Sequencing</option>
+<option>Targeted Gene Panel</option>
+<option>Pharmacogenomics</option>
+<option>BRCA Testing</option>
+<option>NGS Cancer Panel</option>
+
+</select>
+
+<select id="therapy">
+
+<option>Targeted Therapy</option>
+<option>Immunotherapy</option>
+<option>Precision Chemotherapy</option>
+<option>Gene Therapy</option>
+<option>Personalized Medication</option>
+
+</select>
+
+<button onclick="savePrecision()">
+
+🧬 Register Case
+
+</button>
+
+</div>
+
+<div class="precisionCards">
+
+<div class="precisionCard">
+
+<h1 id="precisionPatients">426</h1>
+
+<p>Total Patients</p>
+
+</div>
+
+<div class="precisionCard">
+
+<h1 id="geneticReports">398</h1>
+
+<p>Genetic Reports</p>
+
+</div>
+
+<div class="precisionCard">
+
+<h1 id="targetedTherapy">186</h1>
+
+<p>Targeted Therapy</p>
+
+</div>
+
+<div class="precisionCard">
+
+<h1 id="highRiskGenes">52</h1>
+
+<p>High Risk Cases</p>
+
+</div>
+
+</div>
+
+<table class="precisionTable">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Patient</th>
+
+<th>Disease</th>
+
+<th>Genetic Test</th>
+
+<th>Therapy</th>
+
+<th>AI Recommendation</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="precisionBody">
+
+<tr>
+
+<td>1</td>
+
+<td>Anand</td>
+
+<td>Breast Cancer</td>
+
+<td>BRCA Testing</td>
+
+<td>Targeted Therapy</td>
+
+<td>Recommend PARP Inhibitor Evaluation</td>
+
+<td>
+
+<button onclick="viewPrecision(this)">View</button>
+
+<button onclick="printPrecision()">Print</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+<style>
+
+.precisionSection{
+padding:90px 8%;
+background:#f7fffd;
+}
+
+.precisionForm{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+margin-bottom:30px;
+}
+
+.precisionForm input,
+.precisionForm select{
+padding:14px;
+border:1px solid #ccc;
+border-radius:10px;
+}
+
+.precisionForm button{
+padding:14px;
+background:#1565c0;
+color:white;
+border:none;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.precisionCards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-bottom:30px;
+}
+
+.precisionCard{
+background:white;
+padding:25px;
+text-align:center;
+border-radius:15px;
+box-shadow:0 8px 18px rgba(0,0,0,.08);
+}
+
+.precisionCard h1{
+font-size:40px;
+color:#1565c0;
+}
+
+.precisionTable{
+width:100%;
+background:white;
+border-collapse:collapse;
+border-radius:15px;
+overflow:hidden;
+}
+
+.precisionTable th{
+background:#1565c0;
+color:white;
+padding:15px;
+}
+
+.precisionTable td{
+padding:14px;
+text-align:center;
+border-bottom:1px solid #eee;
+}
+
+.precisionTable button{
+padding:8px 12px;
+margin:2px;
+background:#1565c0;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+</style>
+
+<script>
+
+let precisionID=1;
+
+function savePrecision(){
+
+let patient=document.getElementById("patientName").value;
+let disease=document.getElementById("disease").value;
+let genetic=document.getElementById("geneticTest").value;
+let therapy=document.getElementById("therapy").value;
+
+if(patient==""){
+
+alert("Please enter patient name.");
+return;
+
+}
+
+let ai="Precision Treatment Review";
+
+if(genetic=="BRCA Testing")
+ai="Recommend PARP Inhibitor Evaluation";
+
+if(genetic=="Whole Genome Sequencing")
+ai="Analyze Rare Genetic Variants";
+
+if(genetic=="Pharmacogenomics")
+ai="Adjust Drug Dose Based on Gene Profile";
+
+if(therapy=="Gene Therapy")
+ai="Evaluate Eligibility for Gene Therapy";
+
+if(therapy=="Immunotherapy")
+ai="Check Biomarker Expression";
+
+precisionID++;
+
+let row="<tr>"+
+"<td>"+precisionID+"</td>"+
+"<td>"+patient+"</td>"+
+"<td>"+disease+"</td>"+
+"<td>"+genetic+"</td>"+
+"<td>"+therapy+"</td>"+
+"<td>"+ai+"</td>"+
+"<td><button onclick='viewPrecision(this)'>View</button> <button onclick='printPrecision()'>Print</button></td>"+
+"</tr>";
+
+document.getElementById("precisionBody").innerHTML+=row;
+
+document.getElementById("precisionPatients").innerHTML=
+parseInt(document.getElementById("precisionPatients").innerHTML)+1;
+
+document.getElementById("geneticReports").innerHTML=
+parseInt(document.getElementById("geneticReports").innerHTML)+1;
+
+if(therapy=="Targeted Therapy"){
+
+document.getElementById("targetedTherapy").innerHTML=
+parseInt(document.getElementById("targetedTherapy").innerHTML)+1;
+
+}
+
+alert("🧬 Precision medicine case registered successfully.");
+
+}
+
+function viewPrecision(btn){
+
+let row=btn.parentElement.parentElement;
+
+alert(
+
+"Patient : "+row.cells[1].innerHTML+
+"\nDisease : "+row.cells[2].innerHTML+
+"\nGenetic Test : "+row.cells[3].innerHTML+
+"\nTherapy : "+row.cells[4].innerHTML+
+"\nAI Recommendation : "+row.cells[5].innerHTML
+
+);
+
+}
+
+function printPrecision(){
+
+window.print();
+
+}
+
+</script>
+<!-- ================= INFECTIOUS DISEASE MANAGEMENT SYSTEM ================= -->
+
+<section class="infectiousSection">
+
+<h2 class="title">🦠 Infectious Disease Management System</h2>
+
+<div class="infectiousForm">
+
+<input type="text" id="patientName" placeholder="Patient Name">
+
+<input type="number" id="patientAge" placeholder="Age">
+
+<select id="disease">
+
+<option>COVID-19</option>
+<option>Tuberculosis</option>
+<option>Dengue Fever</option>
+<option>Malaria</option>
+<option>Typhoid</option>
+<option>Influenza</option>
+<option>Hepatitis B</option>
+<option>HIV Infection</option>
+
+</select>
+
+<select id="severity">
+
+<option>Mild</option>
+<option>Moderate</option>
+<option>Severe</option>
+<option>Critical</option>
+
+</select>
+
+<select id="isolation">
+
+<option>Home Isolation</option>
+<option>Isolation Ward</option>
+<option>ICU Isolation</option>
+<option>No Isolation Required</option>
+
+</select>
+
+<button onclick="saveInfection()">
+
+🦠 Register Case
+
+</button>
+
+</div>
+
+<div class="infectiousCards">
+
+<div class="infectiousCard">
+
+<h1 id="totalCases">1264</h1>
+
+<p>Total Cases</p>
+
+</div>
+
+<div class="infectiousCard">
+
+<h1 id="activeCases">186</h1>
+
+<p>Active Cases</p>
+
+</div>
+
+<div class="infectiousCard">
+
+<h1 id="isolatedPatients">84</h1>
+
+<p>Isolation Patients</p>
+
+</div>
+
+<div class="infectiousCard">
+
+<h1 id="criticalCases">22</h1>
+
+<p>Critical Cases</p>
+
+</div>
+
+</div>
+
+<table class="infectiousTable">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Patient</th>
+
+<th>Disease</th>
+
+<th>Severity</th>
+
+<th>Isolation</th>
+
+<th>AI Recommendation</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="infectiousBody">
+
+<tr>
+
+<td>1</td>
+
+<td>Karthik</td>
+
+<td>Dengue Fever</td>
+
+<td>Moderate</td>
+
+<td>Isolation Ward</td>
+
+<td>Monitor Platelet Count Daily</td>
+
+<td>
+
+<button onclick="viewInfection(this)">View</button>
+
+<button onclick="printInfection()">Print</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+<style>
+
+.infectiousSection{
+padding:90px 8%;
+background:#fff8f8;
+}
+
+.infectiousForm{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+margin-bottom:30px;
+}
+
+.infectiousForm input,
+.infectiousForm select{
+padding:14px;
+border:1px solid #ccc;
+border-radius:10px;
+}
+
+.infectiousForm button{
+padding:14px;
+background:#c62828;
+color:white;
+border:none;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.infectiousCards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-bottom:30px;
+}
+
+.infectiousCard{
+background:white;
+padding:25px;
+text-align:center;
+border-radius:15px;
+box-shadow:0 8px 18px rgba(0,0,0,.08);
+}
+
+.infectiousCard h1{
+font-size:40px;
+color:#c62828;
+}
+
+.infectiousTable{
+width:100%;
+background:white;
+border-collapse:collapse;
+border-radius:15px;
+overflow:hidden;
+}
+
+.infectiousTable th{
+background:#c62828;
+color:white;
+padding:15px;
+}
+
+.infectiousTable td{
+padding:14px;
+text-align:center;
+border-bottom:1px solid #eee;
+}
+
+.infectiousTable button{
+padding:8px 12px;
+margin:2px;
+background:#c62828;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+</style>
+
+<script>
+
+let infectionID=1;
+
+function saveInfection(){
+
+let patient=document.getElementById("patientName").value;
+let disease=document.getElementById("disease").value;
+let severity=document.getElementById("severity").value;
+let isolation=document.getElementById("isolation").value;
+
+if(patient==""){
+
+alert("Please enter patient name.");
+return;
+
+}
+
+let ai="Follow Standard Treatment Protocol";
+
+if(disease=="COVID-19")
+ai="Monitor Oxygen Saturation Every 4 Hours";
+
+if(disease=="Tuberculosis")
+ai="Start DOTS Therapy & Contact Screening";
+
+if(disease=="Dengue Fever")
+ai="Monitor Platelet Count Daily";
+
+if(disease=="Malaria")
+ai="Begin Antimalarial Therapy";
+
+if(disease=="Typhoid")
+ai="Obtain Blood Culture Before Antibiotics";
+
+if(disease=="Influenza")
+ai="Initiate Antiviral Therapy if Indicated";
+
+if(disease=="Hepatitis B")
+ai="Monitor Liver Function Tests";
+
+if(disease=="HIV Infection")
+ai="Refer to ART Clinic & Monitor CD4 Count";
+
+if(severity=="Critical"){
+
+ai="Immediate ICU Isolation & Infectious Disease Specialist";
+
+document.getElementById("criticalCases").innerHTML=
+parseInt(document.getElementById("criticalCases").innerHTML)+1;
+
+}
+
+infectionID++;
+
+let row="<tr>"+
+"<td>"+infectionID+"</td>"+
+"<td>"+patient+"</td>"+
+"<td>"+disease+"</td>"+
+"<td>"+severity+"</td>"+
+"<td>"+isolation+"</td>"+
+"<td>"+ai+"</td>"+
+"<td><button onclick='viewInfection(this)'>View</button> <button onclick='printInfection()'>Print</button></td>"+
+"</tr>";
+
+document.getElementById("infectiousBody").innerHTML+=row;
+
+document.getElementById("totalCases").innerHTML=
+parseInt(document.getElementById("totalCases").innerHTML)+1;
+
+document.getElementById("activeCases").innerHTML=
+parseInt(document.getElementById("activeCases").innerHTML)+1;
+
+if(isolation!="No Isolation Required"){
+
+document.getElementById("isolatedPatients").innerHTML=
+parseInt(document.getElementById("isolatedPatients").innerHTML)+1;
+
+}
+
+alert("🦠 Infectious disease case registered successfully.");
+
+}
+
+function viewInfection(btn){
+
+let row=btn.parentElement.parentElement;
+
+alert(
+
+"Patient : "+row.cells[1].innerHTML+
+"\nDisease : "+row.cells[2].innerHTML+
+"\nSeverity : "+row.cells[3].innerHTML+
+"\nIsolation : "+row.cells[4].innerHTML+
+"\nAI Recommendation : "+row.cells[5].innerHTML
+
+);
+
+}
+
+function printInfection(){
+
+window.print();
+
+}
+
+</script>
+
+<!-- ================= ORGAN DONATION & TISSUE BANK MANAGEMENT SYSTEM ================= -->
+
+<section class="organSection">
+
+<h2 class="title">🧬 Organ Donation & Tissue Bank Management System</h2>
+
+<div class="organForm">
+
+<input type="text" id="donorName" placeholder="Donor Name">
+
+<input type="number" id="donorAge" placeholder="Age">
+
+<select id="organType">
+
+<option>Kidney</option>
+<option>Liver</option>
+<option>Heart</option>
+<option>Lung</option>
+<option>Pancreas</option>
+<option>Cornea</option>
+<option>Bone Marrow</option>
+<option>Skin Tissue</option>
+
+</select>
+
+<select id="bloodGroup">
+
+<option>A+</option>
+<option>A-</option>
+<option>B+</option>
+<option>B-</option>
+<option>AB+</option>
+<option>AB-</option>
+<option>O+</option>
+<option>O-</option>
+
+</select>
+
+<select id="donationStatus">
+
+<option>Registered</option>
+<option>Medical Evaluation</option>
+<option>Approved</option>
+<option>Matched</option>
+<option>Transplanted</option>
+
+</select>
+
+<button onclick="saveDonor()">
+
+🧬 Register Donor
+
+</button>
+
+</div>
+
+<div class="organCards">
+
+<div class="organCard">
+
+<h1 id="totalDonors">862</h1>
+
+<p>Total Donors</p>
+
+</div>
+
+<div class="organCard">
+
+<h1 id="matchedCases">214</h1>
+
+<p>Matched Cases</p>
+
+</div>
+
+<div class="organCard">
+
+<h1 id="transplantsDone">168</h1>
+
+<p>Transplants</p>
+
+</div>
+
+<div class="organCard">
+
+<h1 id="tissueBankStock">492</h1>
+
+<p>Tissue Bank Stock</p>
+
+</div>
+
+</div>
+
+<table class="organTable">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Donor</th>
+
+<th>Organ</th>
+
+<th>Blood Group</th>
+
+<th>Status</th>
+
+<th>AI Recommendation</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="organBody">
+
+<tr>
+
+<td>1</td>
+
+<td>Arun Kumar</td>
+
+<td>Kidney</td>
+
+<td>O+</td>
+
+<td>Matched</td>
+
+<td>Verify HLA Compatibility</td>
+
+<td>
+
+<button onclick="viewDonor(this)">View</button>
+
+<button onclick="printDonor()">Print</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+<style>
+
+.organSection{
+padding:90px 8%;
+background:#f5fff8;
+}
+
+.organForm{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+margin-bottom:30px;
+}
+
+.organForm input,
+.organForm select{
+padding:14px;
+border:1px solid #ccc;
+border-radius:10px;
+}
+
+.organForm button{
+padding:14px;
+background:#2e7d32;
+color:white;
+border:none;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.organCards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-bottom:30px;
+}
+
+.organCard{
+background:white;
+padding:25px;
+text-align:center;
+border-radius:15px;
+box-shadow:0 8px 18px rgba(0,0,0,.08);
+}
+
+.organCard h1{
+font-size:40px;
+color:#2e7d32;
+}
+
+.organTable{
+width:100%;
+background:white;
+border-collapse:collapse;
+border-radius:15px;
+overflow:hidden;
+}
+
+.organTable th{
+background:#2e7d32;
+color:white;
+padding:15px;
+}
+
+.organTable td{
+padding:14px;
+text-align:center;
+border-bottom:1px solid #eee;
+}
+
+.organTable button{
+padding:8px 12px;
+margin:2px;
+background:#2e7d32;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+</style>
+
+<script>
+
+let donorID=1;
+
+function saveDonor(){
+
+let donor=document.getElementById("donorName").value;
+let organ=document.getElementById("organType").value;
+let blood=document.getElementById("bloodGroup").value;
+let status=document.getElementById("donationStatus").value;
+
+if(donor==""){
+
+alert("Please enter donor name.");
+return;
+
+}
+
+let ai="Await Medical Evaluation";
+
+if(status=="Medical Evaluation")
+ai="Perform Crossmatch & Infection Screening";
+
+if(status=="Approved")
+ai="Add Donor to National Registry";
+
+if(status=="Matched")
+ai="Verify HLA Compatibility";
+
+if(status=="Transplanted")
+ai="Schedule Post-Transplant Follow-up";
+
+donorID++;
+
+let row="<tr>"+
+"<td>"+donorID+"</td>"+
+"<td>"+donor+"</td>"+
+"<td>"+organ+"</td>"+
+"<td>"+blood+"</td>"+
+"<td>"+status+"</td>"+
+"<td>"+ai+"</td>"+
+"<td><button onclick='viewDonor(this)'>View</button> <button onclick='printDonor()'>Print</button></td>"+
+"</tr>";
+
+document.getElementById("organBody").innerHTML+=row;
+
+document.getElementById("totalDonors").innerHTML=
+parseInt(document.getElementById("totalDonors").innerHTML)+1;
+
+if(status=="Matched"){
+
+document.getElementById("matchedCases").innerHTML=
+parseInt(document.getElementById("matchedCases").innerHTML)+1;
+
+}
+
+if(status=="Transplanted"){
+
+document.getElementById("transplantsDone").innerHTML=
+parseInt(document.getElementById("transplantsDone").innerHTML)+1;
+
+}
+
+if(organ=="Cornea" || organ=="Skin Tissue"){
+
+document.getElementById("tissueBankStock").innerHTML=
+parseInt(document.getElementById("tissueBankStock").innerHTML)+1;
+
+}
+
+alert("🧬 Organ donor registered successfully.");
+
+}
+
+function viewDonor(btn){
+
+let row=btn.parentElement.parentElement;
+
+alert(
+
+"Donor : "+row.cells[1].innerHTML+
+"\nOrgan : "+row.cells[2].innerHTML+
+"\nBlood Group : "+row.cells[3].innerHTML+
+"\nStatus : "+row.cells[4].innerHTML+
+"\nAI Recommendation : "+row.cells[5].innerHTML
+
+);
+
+}
+
+function printDonor(){
+
+window.print();
+
+}
+
+</script>
+<!-- ================= HEALTH CHECKUP PACKAGE MANAGEMENT SYSTEM ================= -->
+
+<section class="healthCheckSection">
+
+<h2 class="title">🩺 Health Checkup Package Management System</h2>
+
+<div class="healthForm">
+
+<input type="text" id="patientName" placeholder="Patient Name">
+
+<input type="number" id="patientAge" placeholder="Age">
+
+<select id="packageType">
+
+<option>Basic Health Checkup</option>
+<option>Executive Health Checkup</option>
+<option>Master Health Checkup</option>
+<option>Cardiac Checkup</option>
+<option>Diabetes Checkup</option>
+<option>Women's Health Package</option>
+<option>Men's Health Package</option>
+<option>Senior Citizen Package</option>
+
+</select>
+
+<select id="paymentStatus">
+
+<option>Pending</option>
+<option>Paid</option>
+<option>Insurance</option>
+
+</select>
+
+<input type="date" id="appointmentDate">
+
+<button onclick="saveCheckup()">
+
+🩺 Book Package
+
+</button>
+
+</div>
+
+<div class="healthCards">
+
+<div class="healthCard">
+
+<h1 id="totalBookings">2458</h1>
+
+<p>Total Bookings</p>
+
+</div>
+
+<div class="healthCard">
+
+<h1 id="todayCheckups">74</h1>
+
+<p>Today's Checkups</p>
+
+</div>
+
+<div class="healthCard">
+
+<h1 id="completedCheckups">2192</h1>
+
+<p>Completed</p>
+
+</div>
+
+<div class="healthCard">
+
+<h1 id="pendingReports">38</h1>
+
+<p>Pending Reports</p>
+
+</div>
+
+</div>
+
+<table class="healthTable">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Patient</th>
+
+<th>Package</th>
+
+<th>Date</th>
+
+<th>Payment</th>
+
+<th>AI Recommendation</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="healthBody">
+
+<tr>
+
+<td>1</td>
+
+<td>Ravi Kumar</td>
+
+<td>Executive Health Checkup</td>
+
+<td>2026-07-30</td>
+
+<td>Paid</td>
+
+<td>Include ECG, Lipid Profile & Liver Function Test</td>
+
+<td>
+
+<button onclick="viewCheckup(this)">View</button>
+
+<button onclick="printCheckup()">Print</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+<style>
+
+.healthCheckSection{
+padding:90px 8%;
+background:#f7fcff;
+}
+
+.healthForm{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+margin-bottom:30px;
+}
+
+.healthForm input,
+.healthForm select{
+padding:14px;
+border:1px solid #ccc;
+border-radius:10px;
+}
+
+.healthForm button{
+padding:14px;
+background:#00695c;
+color:white;
+border:none;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.healthCards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-bottom:30px;
+}
+
+.healthCard{
+background:white;
+padding:25px;
+text-align:center;
+border-radius:15px;
+box-shadow:0 8px 18px rgba(0,0,0,.08);
+}
+
+.healthCard h1{
+font-size:40px;
+color:#00695c;
+}
+
+.healthTable{
+width:100%;
+background:white;
+border-collapse:collapse;
+border-radius:15px;
+overflow:hidden;
+}
+
+.healthTable th{
+background:#00695c;
+color:white;
+padding:15px;
+}
+
+.healthTable td{
+padding:14px;
+text-align:center;
+border-bottom:1px solid #eee;
+}
+
+.healthTable button{
+padding:8px 12px;
+margin:2px;
+background:#00695c;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+</style>
+
+<script>
+
+let checkupID=1;
+
+function saveCheckup(){
+
+let patient=document.getElementById("patientName").value;
+let packageType=document.getElementById("packageType").value;
+let payment=document.getElementById("paymentStatus").value;
+let date=document.getElementById("appointmentDate").value;
+
+if(patient=="" || date==""){
+
+alert("Please complete all required fields.");
+return;
+
+}
+
+let ai="Standard Health Screening";
+
+if(packageType=="Basic Health Checkup")
+ai="CBC, Urine Analysis & Blood Sugar";
+
+if(packageType=="Executive Health Checkup")
+ai="Include ECG, Lipid Profile & Liver Function Test";
+
+if(packageType=="Master Health Checkup")
+ai="Complete Body Screening + Radiology";
+
+if(packageType=="Cardiac Checkup")
+ai="ECG + Echo + TMT Recommended";
+
+if(packageType=="Diabetes Checkup")
+ai="HbA1c + Kidney Function + Eye Screening";
+
+if(packageType=="Women's Health Package")
+ai="Pap Smear + Mammogram";
+
+if(packageType=="Men's Health Package")
+ai="PSA + Cardiac Risk Assessment";
+
+if(packageType=="Senior Citizen Package")
+ai="Bone Density + Cognitive Assessment";
+
+checkupID++;
+
+let row="<tr>"+
+"<td>"+checkupID+"</td>"+
+"<td>"+patient+"</td>"+
+"<td>"+packageType+"</td>"+
+"<td>"+date+"</td>"+
+"<td>"+payment+"</td>"+
+"<td>"+ai+"</td>"+
+"<td><button onclick='viewCheckup(this)'>View</button> <button onclick='printCheckup()'>Print</button></td>"+
+"</tr>";
+
+document.getElementById("healthBody").innerHTML+=row;
+
+document.getElementById("totalBookings").innerHTML=
+parseInt(document.getElementById("totalBookings").innerHTML)+1;
+
+alert("🩺 Health checkup package booked successfully.");
+
+}
+
+function viewCheckup(btn){
+
+let row=btn.parentElement.parentElement;
+
+alert(
+
+"Patient : "+row.cells[1].innerHTML+
+"\nPackage : "+row.cells[2].innerHTML+
+"\nAppointment : "+row.cells[3].innerHTML+
+"\nPayment : "+row.cells[4].innerHTML+
+"\nAI Recommendation : "+row.cells[5].innerHTML
+
+);
+
+}
+
+function printCheckup(){
+
+window.print();
+
+}
+
+</script>
+<!-- ================= DIALYSIS CENTER MANAGEMENT SYSTEM ================= -->
+
+<section class="dialysisSection">
+
+<h2 class="title">🏥 Dialysis Center Management System</h2>
+
+<div class="dialysisForm">
+
+<input type="text" id="patientName" placeholder="Patient Name">
+
+<input type="number" id="patientAge" placeholder="Age">
+
+<select id="dialysisType">
+
+<option>Hemodialysis</option>
+<option>Peritoneal Dialysis</option>
+<option>Continuous Renal Replacement Therapy (CRRT)</option>
+<option>Emergency Dialysis</option>
+
+</select>
+
+<select id="machine">
+
+<option>Dialysis Machine 01</option>
+<option>Dialysis Machine 02</option>
+<option>Dialysis Machine 03</option>
+<option>Dialysis Machine 04</option>
+<option>Dialysis Machine 05</option>
+
+</select>
+
+<select id="status">
+
+<option>Scheduled</option>
+<option>In Progress</option>
+<option>Completed</option>
+<option>Emergency</option>
+
+</select>
+
+<button onclick="saveDialysis()">
+
+🏥 Schedule Dialysis
+
+</button>
+
+</div>
+
+<div class="dialysisCards">
+
+<div class="dialysisCard">
+
+<h1 id="totalDialysis">1236</h1>
+
+<p>Total Sessions</p>
+
+</div>
+
+<div class="dialysisCard">
+
+<h1 id="todayDialysis">42</h1>
+
+<p>Today's Sessions</p>
+
+</div>
+
+<div class="dialysisCard">
+
+<h1 id="availableMachines">5</h1>
+
+<p>Available Machines</p>
+
+</div>
+
+<div class="dialysisCard">
+
+<h1 id="emergencyDialysis">18</h1>
+
+<p>Emergency Cases</p>
+
+</div>
+
+</div>
+
+<table class="dialysisTable">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Patient</th>
+
+<th>Dialysis Type</th>
+
+<th>Machine</th>
+
+<th>Status</th>
+
+<th>AI Recommendation</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="dialysisBody">
+
+<tr>
+
+<td>1</td>
+
+<td>Mohan</td>
+
+<td>Hemodialysis</td>
+
+<td>Dialysis Machine 02</td>
+
+<td>Scheduled</td>
+
+<td>Monitor BP & Electrolytes Before Session</td>
+
+<td>
+
+<button onclick="viewDialysis(this)">View</button>
+
+<button onclick="printDialysis()">Print</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+<style>
+
+.dialysisSection{
+padding:90px 8%;
+background:#f4fbff;
+}
+
+.dialysisForm{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+margin-bottom:30px;
+}
+
+.dialysisForm input,
+.dialysisForm select{
+padding:14px;
+border:1px solid #ccc;
+border-radius:10px;
+}
+
+.dialysisForm button{
+padding:14px;
+background:#1976d2;
+color:white;
+border:none;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.dialysisCards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-bottom:30px;
+}
+
+.dialysisCard{
+background:white;
+padding:25px;
+text-align:center;
+border-radius:15px;
+box-shadow:0 8px 18px rgba(0,0,0,.08);
+}
+
+.dialysisCard h1{
+font-size:40px;
+color:#1976d2;
+}
+
+.dialysisTable{
+width:100%;
+background:white;
+border-collapse:collapse;
+border-radius:15px;
+overflow:hidden;
+}
+
+.dialysisTable th{
+background:#1976d2;
+color:white;
+padding:15px;
+}
+
+.dialysisTable td{
+padding:14px;
+text-align:center;
+border-bottom:1px solid #eee;
+}
+
+.dialysisTable button{
+padding:8px 12px;
+margin:2px;
+background:#1976d2;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+</style>
+
+<script>
+
+let dialysisID=1;
+
+function saveDialysis(){
+
+let patient=document.getElementById("patientName").value;
+let type=document.getElementById("dialysisType").value;
+let machine=document.getElementById("machine").value;
+let status=document.getElementById("status").value;
+
+if(patient==""){
+
+alert("Please enter patient name.");
+return;
+
+}
+
+let ai="Routine Dialysis Monitoring";
+
+if(type=="Hemodialysis")
+ai="Monitor BP & Electrolytes Before Session";
+
+if(type=="Peritoneal Dialysis")
+ai="Inspect Catheter & Infection Signs";
+
+if(type=="Continuous Renal Replacement Therapy (CRRT)")
+ai="Continuous ICU Monitoring Required";
+
+if(type=="Emergency Dialysis")
+ai="Immediate Nephrologist Review";
+
+if(status=="Emergency"){
+
+ai="Emergency Dialysis Team Activation";
+
+document.getElementById("emergencyDialysis").innerHTML=
+parseInt(document.getElementById("emergencyDialysis").innerHTML)+1;
+
+}
+
+dialysisID++;
+
+let row="<tr>"+
+"<td>"+dialysisID+"</td>"+
+"<td>"+patient+"</td>"+
+"<td>"+type+"</td>"+
+"<td>"+machine+"</td>"+
+"<td>"+status+"</td>"+
+"<td>"+ai+"</td>"+
+"<td><button onclick='viewDialysis(this)'>View</button> <button onclick='printDialysis()'>Print</button></td>"+
+"</tr>";
+
+document.getElementById("dialysisBody").innerHTML+=row;
+
+document.getElementById("totalDialysis").innerHTML=
+parseInt(document.getElementById("totalDialysis").innerHTML)+1;
+
+alert("🏥 Dialysis session scheduled successfully.");
+
+}
+
+function viewDialysis(btn){
+
+let row=btn.parentElement.parentElement;
+
+alert(
+
+"Patient : "+row.cells[1].innerHTML+
+"\nDialysis Type : "+row.cells[2].innerHTML+
+"\nMachine : "+row.cells[3].innerHTML+
+"\nStatus : "+row.cells[4].innerHTML+
+"\nAI Recommendation : "+row.cells[5].innerHTML
+
+);
+
+}
+
+function printDialysis(){
+
+window.print();
+
+}
+
+</script>
+<!-- ================= END OF HOSPITAL ERP ================= -->
+
+<footer style="background:#0f172a;
+color:white;
+padding:50px;
+text-align:center;
+margin-top:50px;">
+
+<h2>🏥 Hospital ERP Management System</h2>
+
+<h3>Version 1.0</h3>
+
+<p>
+Developed using HTML, CSS and JavaScript
+</p>
+
+<hr style="margin:25px 0;">
+
+<p>✔ 147+ Modules Completed</p>
+
+<p>✔ Complete Hospital ERP UI Prototype</p>
+
+<p>✔ AI Enabled Demo</p>
+
+<p>✔ Responsive Dashboard</p>
+
+<p>✔ Electronic Medical Records</p>
+
+<p>✔ Billing</p>
+
+<p>✔ Laboratory</p>
+
+<p>✔ Pharmacy</p>
+
+<p>✔ ICU</p>
+
+<p>✔ Emergency</p>
+
+<p>✔ 40+ Hospital Departments</p>
+
+<p>✔ 140+ Interactive Forms</p>
+
+<hr style="margin:25px 0;">
+
+<h3>🎉 PROJECT COMPLETED</h3>
+
+<p>
+Thank you for using Hospital ERP Management System.
+</p>
+
+<p>
+© 2026 Hospital ERP. All Rights Reserved.
+</p>
+
+</footer>
+window.onload = function(){
+
+alert(
+"🏥 Hospital ERP Management System\n\n"+
+"Version 1.0\n\n"+
+"147+ Modules Successfully Integrated.\n"+
+"Project Completed Successfully."
+);
+
+}
 
 
 
