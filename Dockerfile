@@ -30,7 +30,7 @@ COPY --from=build /usr/local/lib/python3.9 /usr/local/lib/python3.9
 COPY --from=build /app /app
 
 # Expose Flask port
-EXPOSE 5000
+EXPOSE 5050
 
 # Environment variable
 ENV PYTHONUNBUFFERED=1
